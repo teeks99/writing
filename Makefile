@@ -7,6 +7,8 @@ INPUTDIR=$(BASEDIR)/content
 OUTPUTDIR=$(BASEDIR)/output
 CONFFILE=$(BASEDIR)/pelicanconf.py
 PUBLISHCONF=$(BASEDIR)/publishconf.py
+
+GH_OUTDIR=$(BASEDIR)/gh-output
 GH_PUBLISHCONF=$(BASEDIR)/gh-conf.py
 
 FTP_HOST=localhost
@@ -50,12 +52,6 @@ help:
 	@echo '   make serve-global [SERVER=0.0.0.0]  serve (as root) to $(SERVER):80    '
 	@echo '   make devserver [PORT=8000]          start/restart develop_server.sh    '
 	@echo '   make stopserver                     stop local server                  '
-	@echo '   make ssh_upload                     upload the web site via SSH        '
-	@echo '   make rsync_upload                   upload the web site via rsync+ssh  '
-	@echo '   make dropbox_upload                 upload the web site via Dropbox    '
-	@echo '   make ftp_upload                     upload the web site via FTP        '
-	@echo '   make s3_upload                      upload the web site via S3         '
-	@echo '   make cf_upload                      upload the web site via Cloud Files'
 	@echo '   make github                         upload the web site via gh-pages   '
 	@echo '                                                                          '
 	@echo 'Set the DEBUG variable to 1 to enable debugging, e.g. make DEBUG=1 html   '
@@ -101,8 +97,8 @@ publish:
 	$(PELICAN) $(INPUTDIR) -o $(OUTPUTDIR) -s $(PUBLISHCONF) $(PELICANOPTS)
 
 github: 
-	$(PELICAN) $(INPUTDIR) -o $(OUTPUTDIR) -s $(GH_PUBLISHCONFI) $(PELICANOPTS)
-	ghp-import -m "Generate Pelican site" -b $(GITHUB_PAGES_BRANCH) $(OUTPUTDIR)
+	$(PELICAN) $(INPUTDIR) -o $(GH_OUTDIR) -s $(GH_PUBLISHCONF) $(PELICANOPTS)
+	ghp-import -m "Generate Pelican site" -b $(GITHUB_PAGES_BRANCH) $(GH_OUTDIR)
 	git push origin $(GITHUB_PAGES_BRANCH)
 
 .PHONY: html help clean regenerate serve serve-global devserver stopserver publish ssh_upload rsync_upload dropbox_upload ftp_upload s3_upload cf_upload github

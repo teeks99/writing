@@ -1,3 +1,6 @@
 _site
-.sass-cache
-.jekyll-metadata
+
+gh-output/
+output/
+__pycache__/
+*.pyc
