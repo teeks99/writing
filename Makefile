@@ -53,13 +53,12 @@ help:
 	@echo '   make devserver [PORT=8000]          start/restart develop_server.sh    '
 	@echo '   make stopserver                     stop local server                  '
 	@echo '   make github                         upload the web site via gh-pages   '
-	@echo '   make venv                           setup local pelican venv           '
 	@echo '                                                                          '
 	@echo 'Set the DEBUG variable to 1 to enable debugging, e.g. make DEBUG=1 html   '
 	@echo 'Set the RELATIVE variable to 1 to enable relative urls                    '
 	@echo '                                                                          '
 
-html: venv
+html:
 	$(PELICAN) $(INPUTDIR) -o $(OUTPUTDIR) -s $(CONFFILE) $(PELICANOPTS)
 
 clean:
@@ -67,17 +66,17 @@ clean:
 	[ ! -d $(GH_OUTDIR) ] || rm -rf $(GH_OUTDIR)
 	[ ! -d .venv ] || rm -rf .venv
 
-regenerate: venv
+regenerate:
 	$(PELICAN) -r $(INPUTDIR) -o $(OUTPUTDIR) -s $(CONFFILE) $(PELICANOPTS)
 
-serve: venv
+serve:
 ifdef PORT
 	cd $(OUTPUTDIR) && $(PY) -m pelican.server $(PORT)
 else
 	cd $(OUTPUTDIR) && $(PY) -m pelican.server
 endif
 
-serve-global: venv
+serve-global:
 ifdef SERVER
 	cd $(OUTPUTDIR) && $(PY) -m pelican.server 80 $(SERVER)
 else
@@ -85,30 +84,24 @@ else
 endif
 
 
-devserver: venv
+devserver:
 ifdef PORT
 	$(BASEDIR)/develop_server.sh restart $(PORT)
 else
 	$(BASEDIR)/develop_server.sh restart
 endif
 
-stopserver: venv
+stopserver:
 	$(BASEDIR)/develop_server.sh stop
 	@echo 'Stopped Pelican and SimpleHTTPServer processes running in background.'
 
-publish: venv
+publish:
 	$(PELICAN) $(INPUTDIR) -o $(OUTPUTDIR) -s $(PUBLISHCONF) $(PELICANOPTS)
 
-github: venv
+github:
 	$(PELICAN) $(INPUTDIR) -o $(GH_OUTDIR) -s $(GH_PUBLISHCONF) $(PELICANOPTS)
 	ghp-import -m "Generate Pelican site" -b $(GITHUB_PAGES_BRANCH) $(GH_OUTDIR)
 	git push origin $(GITHUB_PAGES_BRANCH)
 
-venv: .venv/bin/activate
-
-.venv/bin/activate: requirements.txt
-	test -d .venv || virtualenv -p python3 .venv
-	. .venv/bin/activate; pip install -Ur requirements.txt
-	touch .venv/bin/activate
 
 .PHONY: html help clean regenerate serve serve-global devserver stopserver publish ssh_upload rsync_upload dropbox_upload ftp_upload s3_upload cf_upload github
