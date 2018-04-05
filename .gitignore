@@ -4,3 +4,4 @@ gh-output/
 output/
 __pycache__/
 *.pyc
+.venv/
