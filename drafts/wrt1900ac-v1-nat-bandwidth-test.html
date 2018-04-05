@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>WRT1900AC v1 NAT Bandwidth Test</title>
+        <link rel="stylesheet" href="https://teeks99.github.io/writing/theme/css/main.css" />
+        <link href="https://teeks99.github.io/writing/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Tom's Writing Atom Feed" />
+
+        <!--[if IE]>
+            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="https://teeks99.github.io/writing/">Tom's Writing </a></h1>
+                <nav><ul>
+                    <li><a href="https://teeks99.github.io/writing/pages/learning-and-remembering.html">Learning and Remembering</a></li>
+                    <li class="active"><a href="https://teeks99.github.io/writing/category/programming.html">programming</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="https://teeks99.github.io/writing/drafts/wrt1900ac-v1-nat-bandwidth-test.html" rel="bookmark"
+           title="Permalink to WRT1900AC v1 NAT Bandwidth Test">WRT1900AC v1 NAT Bandwidth Test</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2018-02-25T14:58:00+00:00">
+                Published: Sun 25 February 2018
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="https://teeks99.github.io/writing/author/tom.html">Tom</a>
+        </address>
+<p>In <a href="https://teeks99.github.io/writing/category/programming.html">programming</a>.</p>
+
+</footer><!-- /.post-info -->      <h1>Why</h1>
+<p>I recently acquired a <a href="https://wikidevi.com/wiki/Linksys_WRT1900AC_v1">Linksys WRT1900ACv1</a> router/access point (on sale from the Linksys page for $129). Since I've recently gotten gigabit internet from ~~the evil empire~~ AT&amp;T, I'm keenly interested in getting a router that will allow my internal network (with ~20 devices/VMs on it at any given time) to access the internet at full speed. </p>
+<p>For background, my current Buffalo <a href="https://wikidevi.com/wiki/Buffalo_WZR-600DHP">WZR-600-DHP</a>, running OpenWRT Barrier Breaker 14.07](https://wiki.openwrt.org/doc/barrier.breaker) gets about 150-200Mbps (both up and down) out to the internet (speedtest.net web check, Microsoft Azure East US iperf3, Digital Ocean NYC2 iperf3), depending on time of day...AT&amp;T aparently has some very congested links that can go do to 50Mbps down. </p>
+<p>Now that I've got something new, I wanted to put it through its paces in a controlled environment so that I can see how it handles the load of doing NAT for gigabit class connections. To minimize variables, I'm going to do this on my local network. </p>
+<h1>Testing</h1>
+<p>For this experiement I'm going to be conducting three tests:</p>
+<ol>
+<li>Laptop A -&gt; WZR-600-DHP LAN Gigabit -&gt; Gigabit Switch -&gt; Laptop B. This does no NAT translation during the transfer.</li>
+<li>Laptop A -&gt; WRT1900ACv1 with stock firmware (LAN Gigabit -&gt; NAT -&gt; WAN Gigabit) -&gt; WZR-600-DHP LAN Gigabit -&gt; Gigabit Swtich -&gt; Laptop B</li>
+<li>Laptop A -&gt; WRT1900ACv1 with OpenWRT/LEDE 17.04.1 (LAN Gigabit -&gt; NAT -&gt; WAN Gigabit) -&gt; WZR-600-DHP LAN Gigabit -&gt; Gigabit Swtich -&gt; Laptop B</li>
+</ol>
+<p>For each of these tests, I will run iperf3 with the server being on Laptop B (10.53.1.13) and the client on Laptop A. I will run <code>iperf3 -c 10.53.1.13</code> to get the upstream bandwidth (like I am uploading to the internet) and then immediately run <code>iperf3 -c 10.53.1.13 -R</code> to get the downstream bandwidth (like I am downloading from the internet). </p>
+<p>This methodology should be similar enough, that the results can be compared against those run against the instructions provided on the <a href="https://wiki.openwrt.org/doc/howto/benchmark.nat">OpenWRT Benchmark Network Address Translation</a> page. </p>
+<h2>Experiment 1 - No NAT</h2>
+<p>Laptop A -&gt; WZR-600-DHP LAN Gigabit -&gt; Gigabit Switch -&gt; Laptop B. This does no NAT translation during the transfer</p>
+<p><strong>Result: 940Mbps Down, 942Mbps Up</strong></p>
+<p>This indicates that both the sender and receiver are running at gigabit speeds and that the various LAN switches in the middle don't have any serious impact on speed.</p>
+<h2>Experiment 2 - Stock Firmware NAT</h2>
+<p>Laptop A -&gt; WRT1900ACv1 with stock firmware (LAN Gigabit -&gt; NAT -&gt; WAN Gigabit) -&gt; WZR-600-DHP LAN Gigabit -&gt; Gigabit Swtich -&gt; Laptop B</p>
+<p><strong>Result: 941Mbps Down, 937Mbps Up</strong></p>
+<p>This indicates that with the stock firmware, the hardware is sufficient to not impose a penalty on the NAT traversal. </p>
+<h2>Experiment 3 - OpenWRT/LEDE Firmware NAT</h2>
+<p>Laptop A -&gt; WRT1900ACv1 with OpenWRT/LEDE 17.04.1 (LAN Gigabit -&gt; NAT -&gt; WAN Gigabit) -&gt; WZR-600-DHP LAN Gigabit -&gt; Gigabit Swtich -&gt; Laptop B</p>
+<p><strong>Result: 922Mbps Down, 937Mbps Up</strong></p>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>links</h2>
+                        <ul>
+                            <li><a href="http://getpelican.com/">Pelican</a></li>
+                            <li><a href="http://python.org/">Python.org</a></li>
+                            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+                            <li><a href="#">You can modify those links in your config file</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+                            <li><a href="https://teeks99.github.io/writing/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+
+                            <li><a href="#">You can add links in your config file</a></li>
+                            <li><a href="#">Another social link</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>
