@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Tom's Writing - programming</title><link href="https://teeks99.github.io/writing/" rel="alternate"></link><link href="https://teeks99.github.io/writing/feeds/programming.atom.xml" rel="self"></link><id>https://teeks99.github.io/writing/</id><updated>2018-03-06T12:08:56-06:00</updated><entry><title>"Working with Props Files"</title><link href="https://teeks99.github.io/writing/working-with-props-files.html" rel="alternate"></link><published>2018-03-06T12:08:56-06:00</published><updated>2018-03-06T12:08:56-06:00</updated><author><name>Tom</name></author><id>tag:teeks99.github.io,2018-03-06:/writing/working-with-props-files.html</id><summary type="html">&lt;p&gt;Visual Studio/MSBuild props files are handy little settings files that can be included&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;lt;Import Project=&amp;quot;path\to\file.props&amp;quot; /&amp;gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;in vcxproj files or other props files.&lt;/p&gt;
+&lt;p&gt;These can simply define variables&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;utf-8&amp;quot;?&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;Project&lt;/span&gt; &lt;span class="na"&gt;DefaultTargets=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Build&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;ToolsVersion=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;4.0&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;xmlns=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;http://schemas.microsoft.com/developer …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;Visual Studio/MSBuild props files are handy little settings files that can be included&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;lt;Import Project=&amp;quot;path\to\file.props&amp;quot; /&amp;gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;in vcxproj files or other props files.&lt;/p&gt;
+&lt;p&gt;These can simply define variables&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;utf-8&amp;quot;?&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;Project&lt;/span&gt; &lt;span class="na"&gt;DefaultTargets=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Build&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;ToolsVersion=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;4.0&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;xmlns=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;http://schemas.microsoft.com/developer/msbuild/2003&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;PropertyGroup&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;MyIncludePath&amp;gt;&lt;/span&gt;C:/Path/To/Include&lt;span class="nt"&gt;&amp;lt;/MyIncludePath&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;MyLibPath&amp;gt;&lt;/span&gt;C:/Path/To/Lib&lt;span class="nt"&gt;&amp;lt;/MyLibPath&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;/PropertyGroup&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;/Project&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Which can then be used in a .vcxproj that has already imported that props file with the variables &lt;code&gt;$(MyIncludePath)&lt;/code&gt; and &lt;code&gt;$(MyLibPath)&lt;/code&gt;, for example:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;&amp;lt;ClCompile&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;AdditionalIncludeDirectories&amp;gt;&lt;/span&gt;..\local\inc;$(MyIncludePath);%(AdditionalIncludeDirectories)&lt;span class="nt"&gt;&amp;lt;/AdditionalIncludeDirectories&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;RuntimeLibrary&amp;gt;&lt;/span&gt;MultiThreadedDebug&lt;span class="nt"&gt;&amp;lt;/RuntimeLibrary&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;/ClCompile&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;Link&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;SubSystem&amp;gt;&lt;/span&gt;Console&lt;span class="nt"&gt;&amp;lt;/SubSystem&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;AdditionalLibraryDirectories&amp;gt;&lt;/span&gt;$(MyLibPath);%(AdditionalLibraryDirectories)&lt;span class="nt"&gt;&amp;lt;/AdditionalLibraryDirectories&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;AdditionalDependencies&amp;gt;&lt;/span&gt;%(AdditionalDependencies)&lt;span class="nt"&gt;&amp;lt;/AdditionalDependencies&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;/Link&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;These variables can build on each other as well, a line further down the file can use variables from a line above it. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;&amp;lt;PropertyGroup&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;FirstPath&amp;gt;&lt;/span&gt;path/to/first&lt;span class="nt"&gt;&amp;lt;/FirstPath&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;SecondPath&amp;gt;&lt;/span&gt;path/to/second&lt;span class="nt"&gt;&amp;lt;/SecondPath&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;AllPaths&amp;gt;&lt;/span&gt;$(FirstPath);$(SecondPath)&lt;span class="nt"&gt;&amp;lt;/AllPaths&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;/PropertyGroup&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Groups, like &lt;a href="https://docs.microsoft.com/en-us/visualstudio/msbuild/propertygroup-element-msbuild"&gt;PropertyGroup&lt;/a&gt;, &lt;a href="https://docs.microsoft.com/en-us/visualstudio/msbuild/itemdefinitiongroup-element-msbuild"&gt;ItemDefinitionGroup&lt;/a&gt;s, etc. can also have &lt;a href="https://docs.microsoft.com/en-us/visualstudio/msbuild/msbuild-conditions"&gt;Conditions&lt;/a&gt;. These conditions often take the form of &lt;code&gt;Condition="'stringA'=='stringB'"&lt;/code&gt;, which can be very useful when using variables, including those added by msbuild/visual studio.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;&amp;lt;PropertyGroup&lt;/span&gt; &lt;span class="na"&gt;Condition=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&amp;#39;$(PlatformToolset)&amp;#39;==&amp;#39;v100&amp;#39;&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;MyVersion&amp;gt;&lt;/span&gt;msvc-10.0&lt;span class="nt"&gt;&amp;lt;/MyVersion&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;/PropertyGroup&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;PropertyGroup&lt;/span&gt; &lt;span class="na"&gt;Condition=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&amp;#39;$(PlatformToolset)&amp;#39;==&amp;#39;v140&amp;#39;&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;MyVersion&amp;gt;&lt;/span&gt;msvc-14.0&lt;span class="nt"&gt;&amp;lt;/MyVersion&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;/PropertyGroup&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The above will set &lt;code&gt;MyVersion&lt;/code&gt; to a value specific to the platform toolset that visual studio is using to build the code. This is defined by default in .vcxproj files. Because it gets defined in the .vcxproj, using it requires that the props file isn't imported until after the variable it depends on has been defined. Where this happens isn't particularly ovbious, so a good rule of thumb is to import user props files after the provided `&lt;PropertyGroup Label="UserMacros" /&gt; line. &lt;/p&gt;
+&lt;p&gt;It is common that one would like to append new values to existing variables like for the include path, library search path, etc. Look through the &lt;a href="https://docs.microsoft.com/en-us/visualstudio/msbuild/cl-task"&gt;CL Task Parameters&lt;/a&gt; and &lt;a href="https://docs.microsoft.com/en-us/visualstudio/msbuild/link-task"&gt;Link Task Parameters&lt;/a&gt; for more. Since these already exist they need to be appended to instead of set. For example:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;&amp;lt;AdditionalIncludeDirectories&amp;gt;&lt;/span&gt;path/to/dir;$(PathInVar);%(AdditionalIncludeDirectories)&lt;span class="nt"&gt;&amp;lt;/AdditionalIncludeDirectories&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Here the name of the variable is included at the end with a percent sign &lt;code&gt;%&lt;/code&gt; in front of it. That tells it to use the existing one at the end. &lt;/p&gt;
+&lt;p&gt;For the CL and Link options, they cannot be set as variables in property groups, they need to match up with the existing variables in the heirarchy. Specifically:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;&amp;lt;ItemDefinitionGroup&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;ClCompile&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;AdditionalIncludeDirectories&amp;gt;&lt;/span&gt;path/to/dir;$(PathInVar);%(AdditionalIncludeDirectories)&lt;span class="nt"&gt;&amp;lt;/AdditionalIncludeDirectories&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;PreprocessorDefinitions&amp;gt;&lt;/span&gt;SOMETHING_DEFINED;%(PreprocessorDefinitions)&lt;span class="nt"&gt;&amp;lt;/PreprocessorDefinitions&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;/ClCompile&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;Link&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;AdditionalLibraryDirectories&amp;gt;&lt;/span&gt;path/to/libs;$(PathInVar);%(AdditionalLibraryDirectories)&lt;span class="nt"&gt;&amp;lt;/AdditionalLibraryDirectories&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;AdditionalDependencies&amp;gt;&lt;/span&gt;my.lib;%(AdditionalDependencies)&lt;span class="nt"&gt;&amp;lt;/AdditionalDependencies&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;/Link&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;/ItemDefinitionGroup&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;It can also look at empty/unset variables and set default options for them. For example, we want to have a &lt;code&gt;libmy.lib&lt;/code&gt; named &lt;code&gt;libmyd.lib&lt;/code&gt; if it is being built with the &lt;code&gt;$(MyLibConf)&lt;/code&gt; variable set to Debug. However, it is common that users who are building a project with the &lt;code&gt;$(Configuration)&lt;/code&gt; set to Debug will also want this, and we don't want them to be forced to specify our &lt;code&gt;$(MyLibConf)&lt;/code&gt; in this case. So we can detect if it is empty &lt;em&gt;and&lt;/em&gt; the &lt;code&gt;$(Configuration)&lt;/code&gt; is set to debug, then add the &lt;code&gt;d&lt;/code&gt; suffix. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;&amp;lt;PropertyGroup&lt;/span&gt; &lt;span class="na"&gt;Condition=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&amp;#39;$(MyLibConf)&amp;#39;==&amp;#39;&amp;#39; and &amp;#39;$(Configuration)&amp;#39;==&amp;#39;Debug&amp;#39;&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;MyLibConf&amp;gt;&lt;/span&gt;Debug&lt;span class="nt"&gt;&amp;lt;/MyLibConf&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;/PropertyGroup&amp;gt;&lt;/span&gt;
+
+&lt;span class="nt"&gt;&amp;lt;PropertyGroup&lt;/span&gt; &lt;span class="na"&gt;Condition=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&amp;#39;$(MyLibConf)&amp;#39;==&amp;#39;Debug&amp;#39;&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;MyLibSuffix&amp;gt;&lt;/span&gt;d&lt;span class="nt"&gt;&amp;lt;/MyLibSuffix&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;/PropertyGroup&amp;gt;&lt;/span&gt;
+
+&lt;span class="nt"&gt;&amp;lt;PropertyGroup&amp;gt;&lt;/span&gt;
+  &lt;span class="nt"&gt;&amp;lt;MyLibName&amp;gt;&lt;/span&gt;libmy$(MyLibSuffix).lib&lt;span class="nt"&gt;&amp;lt;/MyLibName&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;/PropertyGroup&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</content></entry></feed>
