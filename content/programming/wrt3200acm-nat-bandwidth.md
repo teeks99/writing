@@ -1,8 +1,6 @@
----
-layout: post
-title:  "WRT3200ACM NAT Bandwidth Test"
-date:   2018-02-25 01:05:49 +0000
----
+Title:  WRT3200ACM NAT Bandwidth Test
+Date:   2018-02-25 01:05:49 +0000
+Status: draft
 
 # Why
 I recently acquired a [Linksys WRT3200ACM](https://wikidevi.com/wiki/Linksys_WRT3200ACM) router/access point (from my favorite store, [microcenter](http://www.microcenter.com/product/468899/WRT3200ACM_AC3200_MU-MIMO_Gigabit_WiFi_Router)). Since I've recently gotten gigabit internet from ~~the evil empire~~ AT&T, I'm keenly interested in getting a router that will allow my internal network (with ~20 devices/VMs on it at any given time) to access the internet at full speed. 

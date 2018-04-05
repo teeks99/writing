@@ -1,8 +1,6 @@
----
-layout: post
-title:  "WRT1900AC v1 NAT Bandwidth Test"
-date:   2018-02-25 14:58:00 +0000
----
+Title:  WRT1900AC v1 NAT Bandwidth Test
+Date:   2018-02-25 14:58:00 +0000
+Status: draft
 
 # Why
 I recently acquired a [Linksys WRT1900ACv1](https://wikidevi.com/wiki/Linksys_WRT1900AC_v1) router/access point (on sale from the Linksys page for $129). Since I've recently gotten gigabit internet from ~~the evil empire~~ AT&T, I'm keenly interested in getting a router that will allow my internal network (with ~20 devices/VMs on it at any given time) to access the internet at full speed. 
