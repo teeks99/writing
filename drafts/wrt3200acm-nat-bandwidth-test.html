@@ -1,44 +1,85 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-        <meta charset="utf-8" />
-        <title>WRT3200ACM NAT Bandwidth Test</title>
-        <link rel="stylesheet" href="https://teeks99.github.io/writing/theme/css/main.css" />
-        <link href="https://teeks99.github.io/writing/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Tom's Writing Atom Feed" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="author" content="Tom" />
+    <meta name="robots" content="index, follow"/>
 
-        <!--[if IE]>
-            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
+    <meta property="og:title" content="WRT3200ACM NAT Bandwidth Test"/>
+    <meta property="og:url" content="https://teeks99.github.io/writing/drafts/wrt3200acm-nat-bandwidth-test.html"/>
+    <meta property="og:site_name" content="Tom's Writing"/>
+    <meta property="og:type" content="article"/>
+
+    <link rel="canonical" href="https://teeks99.github.io/writing/drafts/wrt3200acm-nat-bandwidth-test.html" />
+
+    <title>WRT3200ACM NAT Bandwidth Test | Tom's Writing</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" type="text/css" />
+
+    <link rel="stylesheet" href="https://teeks99.github.io/writing/theme/css/main.css" type="text/css" />
+    <link href="https://teeks99.github.io/writing/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Tom's Writing Atom Feed" />
+
+    <script type="text/javascript">var switchTo5x=true;</script>
+    <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+    <script type="text/javascript">
+        stLight.options({
+            publisher: "",
+            doNotHash: false,
+            doNotCopy: false,
+            hashAddressBar: false
+        });
+    </script>
 </head>
 
-<body id="index" class="home">
-        <header id="banner" class="body">
-                <h1><a href="https://teeks99.github.io/writing/">Tom's Writing </a></h1>
-                <nav><ul>
-                    <li><a href="https://teeks99.github.io/writing/pages/learning-and-remembering.html">Learning and Remembering</a></li>
-                    <li class="active"><a href="https://teeks99.github.io/writing/category/programming.html">programming</a></li>
-                </ul></nav>
-        </header><!-- /#banner -->
-<section id="content" class="body">
-  <article>
-    <header>
-      <h1 class="entry-title">
-        <a href="https://teeks99.github.io/writing/drafts/wrt3200acm-nat-bandwidth-test.html" rel="bookmark"
-           title="Permalink to WRT3200ACM NAT Bandwidth Test">WRT3200ACM NAT Bandwidth Test</a></h1>
-    </header>
+<body id="index">
+    <div class="row-fluid">
+        <div class="span10 offset1">
+            <header id="banner" >
+                <h1>
+                    <a href="https://teeks99.github.io/writing/">Tom's Writing </a>
+                </h1>
+                <nav class="navbar">
+                    <div class="navbar-inner">
+                        <ul class="nav">
+                            <li class="active"><a href="https://teeks99.github.io/writing/category/programming.html">programming</a></li>
+                        </ul>
 
-    <div class="entry-content">
+                    </div>
+                </nav>
+            </header><!-- /#banner -->
+        </div>
+    </div>
+
+    <div class="row-fluid">
+        <div class="span10 offset1">
+            <div class="row-fluid">
+<div class="span10 offset1">
+  <section>
+    <article>
+      <header>
+        <h1 class="entry-title">
+          <a href="https://teeks99.github.io/writing/drafts/wrt3200acm-nat-bandwidth-test.html" rel="bookmark"
+             title="Permalink to WRT3200ACM NAT Bandwidth Test">WRT3200ACM NAT Bandwidth Test</a></h1>
+      </header>
+      <div class="entry-content">
 <footer class="post-info">
-        <abbr class="published" title="2018-02-25T01:05:49+00:00">
-                Published: Sun 25 February 2018
-        </abbr>
+    <address class="vcard author">
+        by <a class="url fn" href="https://teeks99.github.io/writing/author/tom.html">Tom</a>
+    </address>
 
-        <address class="vcard author">
-                By                         <a class="url fn" href="https://teeks99.github.io/writing/author/tom.html">Tom</a>
-        </address>
-<p>In <a href="https://teeks99.github.io/writing/category/programming.html">programming</a>.</p>
+    in <a href="https://teeks99.github.io/writing/category/programming.html">programming</a>
 
-</footer><!-- /.post-info -->      <h1>Why</h1>
+    on 2018-02-25
+
+
+
+
+    
+</footer><!-- /.post-info -->
+
+        <h1>Why</h1>
 <p>I recently acquired a <a href="https://wikidevi.com/wiki/Linksys_WRT3200ACM">Linksys WRT3200ACM</a> router/access point (from my favorite store, <a href="http://www.microcenter.com/product/468899/WRT3200ACM_AC3200_MU-MIMO_Gigabit_WiFi_Router">microcenter</a>). Since I've recently gotten gigabit internet from ~~the evil empire~~ AT&amp;T, I'm keenly interested in getting a router that will allow my internal network (with ~20 devices/VMs on it at any given time) to access the internet at full speed. </p>
 <p>For background, my current Buffalo <a href="https://wikidevi.com/wiki/Buffalo_WZR-600DHP">WZR-600-DHP</a>, running OpenWRT Barrier Breaker 14.07](https://wiki.openwrt.org/doc/barrier.breaker) gets about 150-200Mbps (both up and down) out to the internet (speedtest.net web check, Microsoft Azure East US iperf3, Digital Ocean NYC2 iperf3), depending on time of day...AT&amp;T aparently has some very congested links that can go do to 50Mbps down. </p>
 <p>Now that I've got something new, I wanted to put it through its paces in a controlled environment so that I can see how it handles the load of doing NAT for gigabit class connections. To minimize variables, I'm going to do this on my local network. </p>
@@ -62,38 +103,33 @@
 <h2>Experiment 3 - OpenWRT/LEDE Firmware NAT</h2>
 <p>Laptop A -&gt; WRT3200ACM with OpenWRT/LEDE 17.04.1 (LAN Gigabit -&gt; NAT -&gt; WAN Gigabit) -&gt; WZR-600-DHP LAN Gigabit -&gt; Gigabit Swtich -&gt; Laptop B</p>
 <p><strong>Result: Mbps Down, Mbps Up</strong></p>
-    </div><!-- /.entry-content -->
 
-  </article>
-</section>
-        <section id="extras" class="body">
-                <div class="blogroll">
-                        <h2>links</h2>
-                        <ul>
-                            <li><a href="http://getpelican.com/">Pelican</a></li>
-                            <li><a href="http://python.org/">Python.org</a></li>
-                            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
-                            <li><a href="#">You can modify those links in your config file</a></li>
-                        </ul>
-                </div><!-- /.blogroll -->
-                <div class="social">
-                        <h2>social</h2>
-                        <ul>
-                            <li><a href="https://teeks99.github.io/writing/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
+      </div><!-- /.entry-content -->
 
-                            <li><a href="#">You can add links in your config file</a></li>
-                            <li><a href="#">Another social link</a></li>
-                        </ul>
-                </div><!-- /.social -->
-        </section><!-- /#extras -->
+    </article>
+  </section>
+</div>
+            </div>
+        </div>
+    </div>
 
-        <footer id="contentinfo" class="body">
-                <address id="about" class="vcard body">
-                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
-                </address><!-- /#about -->
+    <footer id="site-footer">
+        <div class="row-fluid">
+            <div class="span10 offset1">
+                <address>
+                    <p>
+                        This blog is proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                    </p>
+                    <p>
+                        <a href="http://github.com/jsliang/pelican-fresh/">Fresh</a> is a responsive theme designed by <a href="http://jsliang.com/">jsliang</a> and <a href="https://github.com/jsliang/pelican-fresh/graphs/contributors">contributors</a>.
+                        Special thanks to <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a> and <a href="http://getbootstrap.com/">Twitter Bootstrap</a>.
+                    </p>
+                </address>
+            </div>
+        </div>
+    </footer>
 
-                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
-        </footer><!-- /#contentinfo -->
-
+    <script src="//code.jquery.com/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/2.3.2/js/bootstrap.min.js"></script>
 </body>
 </html>

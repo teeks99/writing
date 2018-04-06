@@ -1,150 +1,132 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-        <meta charset="utf-8" />
-        <title>Tom's Writing - programming</title>
-        <link rel="stylesheet" href="https://teeks99.github.io/writing/theme/css/main.css" />
-        <link href="https://teeks99.github.io/writing/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Tom's Writing Atom Feed" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="author" content="Tom" />
+    <meta name="robots" content="index, follow"/>
 
-        <!--[if IE]>
-            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
+    <meta property="og:title" content="Tom's Writing - programming"/>
+    <meta property="og:url" content="https://teeks99.github.io/writing/category/programming.html"/>
+    <meta property="og:site_name" content="Tom's Writing"/>
+    <meta property="og:type" content="website"/>
+
+    <link rel="canonical" href="https://teeks99.github.io/writing/category/programming.html" />
+
+    <title>Tom's Writing - programming</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" type="text/css" />
+
+    <link rel="stylesheet" href="https://teeks99.github.io/writing/theme/css/main.css" type="text/css" />
+    <link href="https://teeks99.github.io/writing/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Tom's Writing Atom Feed" />
+
+    <script type="text/javascript">var switchTo5x=true;</script>
+    <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+    <script type="text/javascript">
+        stLight.options({
+            publisher: "",
+            doNotHash: false,
+            doNotCopy: false,
+            hashAddressBar: false
+        });
+    </script>
 </head>
 
-<body id="index" class="home">
-        <header id="banner" class="body">
-                <h1><a href="https://teeks99.github.io/writing/">Tom's Writing </a></h1>
-                <nav><ul>
-                    <li><a href="https://teeks99.github.io/writing/pages/learning-and-remembering.html">Learning and Remembering</a></li>
-                    <li class="active"><a href="https://teeks99.github.io/writing/category/programming.html">programming</a></li>
-                </ul></nav>
-        </header><!-- /#banner -->
-
-            <aside id="featured" class="body">
-                <article>
-                    <h1 class="entry-title"><a href="https://teeks99.github.io/writing/working-with-props-files.html">"Working with Props Files"</a></h1>
-<footer class="post-info">
-        <abbr class="published" title="2018-03-06T12:08:56-06:00">
-                Published: Tue 06 March 2018
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="https://teeks99.github.io/writing/author/tom.html">Tom</a>
-        </address>
-<p>In <a href="https://teeks99.github.io/writing/category/programming.html">programming</a>.</p>
-
-</footer><!-- /.post-info --><p>Visual Studio/MSBuild props files are handy little settings files that can be included</p>
-<div class="highlight"><pre><span></span>&lt;Import Project=&quot;path\to\file.props&quot; /&gt;
-</pre></div>
-
-
-<p>in vcxproj files or other props files.</p>
-<p>These can simply define variables</p>
-<div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
-<span class="nt">&lt;Project</span> <span class="na">DefaultTargets=</span><span class="s">&quot;Build&quot;</span> <span class="na">ToolsVersion=</span><span class="s">&quot;4.0&quot;</span> <span class="na">xmlns=</span><span class="s">&quot;http://schemas.microsoft.com/developer/msbuild/2003&quot;</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;PropertyGroup&gt;</span>
-    <span class="nt">&lt;MyIncludePath&gt;</span>C:/Path/To/Include<span class="nt">&lt;/MyIncludePath&gt;</span>
-    <span class="nt">&lt;MyLibPath&gt;</span>C:/Path/To/Lib<span class="nt">&lt;/MyLibPath&gt;</span>
-  <span class="nt">&lt;/PropertyGroup&gt;</span>
-<span class="nt">&lt;/Project&gt;</span>
-</pre></div>
-
-
-<p>Which can then be used in a .vcxproj that has already imported that props file with the variables <code>$(MyIncludePath)</code> and <code>$(MyLibPath)</code>, for example:</p>
-<div class="highlight"><pre><span></span><span class="nt">&lt;ClCompile&gt;</span>
-  <span class="nt">&lt;AdditionalIncludeDirectories&gt;</span>..\local\inc;$(MyIncludePath);%(AdditionalIncludeDirectories)<span class="nt">&lt;/AdditionalIncludeDirectories&gt;</span>
-  <span class="nt">&lt;RuntimeLibrary&gt;</span>MultiThreadedDebug<span class="nt">&lt;/RuntimeLibrary&gt;</span>
-<span class="nt">&lt;/ClCompile&gt;</span>
-<span class="nt">&lt;Link&gt;</span>
-  <span class="nt">&lt;SubSystem&gt;</span>Console<span class="nt">&lt;/SubSystem&gt;</span>
-  <span class="nt">&lt;AdditionalLibraryDirectories&gt;</span>$(MyLibPath);%(AdditionalLibraryDirectories)<span class="nt">&lt;/AdditionalLibraryDirectories&gt;</span>
-  <span class="nt">&lt;AdditionalDependencies&gt;</span>%(AdditionalDependencies)<span class="nt">&lt;/AdditionalDependencies&gt;</span>
-<span class="nt">&lt;/Link&gt;</span>
-</pre></div>
-
-
-<p>These variables can build on each other as well, a line further down the file can use variables from a line above it. </p>
-<div class="highlight"><pre><span></span><span class="nt">&lt;PropertyGroup&gt;</span>
-  <span class="nt">&lt;FirstPath&gt;</span>path/to/first<span class="nt">&lt;/FirstPath&gt;</span>
-  <span class="nt">&lt;SecondPath&gt;</span>path/to/second<span class="nt">&lt;/SecondPath&gt;</span>
-  <span class="nt">&lt;AllPaths&gt;</span>$(FirstPath);$(SecondPath)<span class="nt">&lt;/AllPaths&gt;</span>
-<span class="nt">&lt;/PropertyGroup&gt;</span>
-</pre></div>
-
-
-<p>Groups, like <a href="https://docs.microsoft.com/en-us/visualstudio/msbuild/propertygroup-element-msbuild">PropertyGroup</a>, <a href="https://docs.microsoft.com/en-us/visualstudio/msbuild/itemdefinitiongroup-element-msbuild">ItemDefinitionGroup</a>s, etc. can also have <a href="https://docs.microsoft.com/en-us/visualstudio/msbuild/msbuild-conditions">Conditions</a>. These conditions often take the form of <code>Condition="'stringA'=='stringB'"</code>, which can be very useful when using variables, including those added by msbuild/visual studio.</p>
-<div class="highlight"><pre><span></span><span class="nt">&lt;PropertyGroup</span> <span class="na">Condition=</span><span class="s">&quot;&#39;$(PlatformToolset)&#39;==&#39;v100&#39;&quot;</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;MyVersion&gt;</span>msvc-10.0<span class="nt">&lt;/MyVersion&gt;</span>
-<span class="nt">&lt;/PropertyGroup&gt;</span>
-<span class="nt">&lt;PropertyGroup</span> <span class="na">Condition=</span><span class="s">&quot;&#39;$(PlatformToolset)&#39;==&#39;v140&#39;&quot;</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;MyVersion&gt;</span>msvc-14.0<span class="nt">&lt;/MyVersion&gt;</span>
-<span class="nt">&lt;/PropertyGroup&gt;</span>
-</pre></div>
-
-
-<p>The above will set <code>MyVersion</code> to a value specific to the platform toolset that visual studio is using to build the code. This is defined by default in .vcxproj files. Because it gets defined in the .vcxproj, using it requires that the props file isn't imported until after the variable it depends on has been defined. Where this happens isn't particularly ovbious, so a good rule of thumb is to import user props files after the provided `<PropertyGroup Label="UserMacros" /> line. </p>
-<p>It is common that one would like to append new values to existing variables like for the include path, library search path, etc. Look through the <a href="https://docs.microsoft.com/en-us/visualstudio/msbuild/cl-task">CL Task Parameters</a> and <a href="https://docs.microsoft.com/en-us/visualstudio/msbuild/link-task">Link Task Parameters</a> for more. Since these already exist they need to be appended to instead of set. For example:</p>
-<div class="highlight"><pre><span></span><span class="nt">&lt;AdditionalIncludeDirectories&gt;</span>path/to/dir;$(PathInVar);%(AdditionalIncludeDirectories)<span class="nt">&lt;/AdditionalIncludeDirectories&gt;</span>
-</pre></div>
-
-
-<p>Here the name of the variable is included at the end with a percent sign <code>%</code> in front of it. That tells it to use the existing one at the end. </p>
-<p>For the CL and Link options, they cannot be set as variables in property groups, they need to match up with the existing variables in the heirarchy. Specifically:</p>
-<div class="highlight"><pre><span></span><span class="nt">&lt;ItemDefinitionGroup&gt;</span>
-  <span class="nt">&lt;ClCompile&gt;</span>
-    <span class="nt">&lt;AdditionalIncludeDirectories&gt;</span>path/to/dir;$(PathInVar);%(AdditionalIncludeDirectories)<span class="nt">&lt;/AdditionalIncludeDirectories&gt;</span>
-    <span class="nt">&lt;PreprocessorDefinitions&gt;</span>SOMETHING_DEFINED;%(PreprocessorDefinitions)<span class="nt">&lt;/PreprocessorDefinitions&gt;</span>
-  <span class="nt">&lt;/ClCompile&gt;</span>
-  <span class="nt">&lt;Link&gt;</span>
-    <span class="nt">&lt;AdditionalLibraryDirectories&gt;</span>path/to/libs;$(PathInVar);%(AdditionalLibraryDirectories)<span class="nt">&lt;/AdditionalLibraryDirectories&gt;</span>
-    <span class="nt">&lt;AdditionalDependencies&gt;</span>my.lib;%(AdditionalDependencies)<span class="nt">&lt;/AdditionalDependencies&gt;</span>
-  <span class="nt">&lt;/Link&gt;</span>
-<span class="nt">&lt;/ItemDefinitionGroup&gt;</span>
-</pre></div>
-
-
-<p>It can also look at empty/unset variables and set default options for them. For example, we want to have a <code>libmy.lib</code> named <code>libmyd.lib</code> if it is being built with the <code>$(MyLibConf)</code> variable set to Debug. However, it is common that users who are building a project with the <code>$(Configuration)</code> set to Debug will also want this, and we don't want them to be forced to specify our <code>$(MyLibConf)</code> in this case. So we can detect if it is empty <em>and</em> the <code>$(Configuration)</code> is set to debug, then add the <code>d</code> suffix. </p>
-<div class="highlight"><pre><span></span><span class="nt">&lt;PropertyGroup</span> <span class="na">Condition=</span><span class="s">&quot;&#39;$(MyLibConf)&#39;==&#39;&#39; and &#39;$(Configuration)&#39;==&#39;Debug&#39;&quot;</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;MyLibConf&gt;</span>Debug<span class="nt">&lt;/MyLibConf&gt;</span>
-<span class="nt">&lt;/PropertyGroup&gt;</span>
-
-<span class="nt">&lt;PropertyGroup</span> <span class="na">Condition=</span><span class="s">&quot;&#39;$(MyLibConf)&#39;==&#39;Debug&#39;&quot;</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;MyLibSuffix&gt;</span>d<span class="nt">&lt;/MyLibSuffix&gt;</span>
-<span class="nt">&lt;/PropertyGroup&gt;</span>
-
-<span class="nt">&lt;PropertyGroup&gt;</span>
-  <span class="nt">&lt;MyLibName&gt;</span>libmy$(MyLibSuffix).lib<span class="nt">&lt;/MyLibName&gt;</span>
-<span class="nt">&lt;/PropertyGroup&gt;</span>
-</pre></div>                </article>
-            </aside><!-- /#featured -->
-        <section id="extras" class="body">
-                <div class="blogroll">
-                        <h2>links</h2>
-                        <ul>
-                            <li><a href="http://getpelican.com/">Pelican</a></li>
-                            <li><a href="http://python.org/">Python.org</a></li>
-                            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
-                            <li><a href="#">You can modify those links in your config file</a></li>
+<body id="index">
+    <div class="row-fluid">
+        <div class="span10 offset1">
+            <header id="banner" >
+                <h1>
+                    <a href="https://teeks99.github.io/writing/">Tom's Writing </a>
+                </h1>
+                <nav class="navbar">
+                    <div class="navbar-inner">
+                        <ul class="nav">
+                            <li class="active"><a href="https://teeks99.github.io/writing/category/programming.html">programming</a></li>
                         </ul>
-                </div><!-- /.blogroll -->
-                <div class="social">
-                        <h2>social</h2>
-                        <ul>
-                            <li><a href="https://teeks99.github.io/writing/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
 
-                            <li><a href="#">You can add links in your config file</a></li>
-                            <li><a href="#">Another social link</a></li>
-                        </ul>
-                </div><!-- /.social -->
-        </section><!-- /#extras -->
+                    </div>
+                </nav>
+            </header><!-- /#banner -->
+        </div>
+    </div>
 
-        <footer id="contentinfo" class="body">
-                <address id="about" class="vcard body">
-                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
-                </address><!-- /#about -->
+    <div class="row-fluid">
+        <div class="span10 offset1">
+            <div class="row-fluid">
+<div class="span9">
+    <section>
+    <h1>Articles in programming</h1>
 
-                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
-        </footer><!-- /#contentinfo -->
+        <div class="row-fluid archive_row">
+            <div class="span1 archive_year">2018</div>
+        </div>
+        <div class="row-fluid archive_row">
+            <div class="offset1 span1 archive_month">Mar</div>
+        </div>
+        <div class="row-fluid archive_row">
+                <div class="offset1 span1 archive_day">
+                06
+                </div>
+            <div class="span10">
+                <a href="https://teeks99.github.io/writing/working-with-props-files.html">"Working with Props Files"</a>
+            </div>
+        </div>
+    </section>
+</div>
+<div class="span3">
+    <section id="sidebar">
+            <div>
+                <h2>Browse content by</h2>
+                <ul class="fa-ul">
+                <li><a href="https://teeks99.github.io/writing/categories.html"><i class="fa-li fa fa-tags"></i> Categories</a></li>
+                <li><a href="https://teeks99.github.io/writing/archives.html"><i class="fa-li fa fa-calendar"></i> Dates</a></li>
+                <li><a href="https://teeks99.github.io/writing/tags.html"><i class="fa-li fa fa-tag"></i> Tags</a></li>
 
+                <li><a href="https://teeks99.github.io/writing/feeds/programming.atom.xml"><i class="fa-li fa fa-rss"></i> Feed</a></li>
+                </ul>
+            </div><!-- /.browse -->
+            <div>
+                <h2>Links</h2>
+                <ul>
+                    <li><a href="http://getpelican.com/">Pelican</a></li>
+                    <li><a href="http://python.org/">Python.org</a></li>
+                    <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+                    <li><a href="#">You can modify those links in your config file</a></li>
+                </ul>
+            </div><!-- /.Links -->
+            <div>
+                <h2>Social</h2>
+                <ul>
+                    <li><a href="#">You can add links in your config file</a></li>
+                    <li><a href="#">Another social link</a></li>
+                </ul>
+            </div><!-- /.social -->
+<!-- /.Tags -->
+    </section><!-- /#sidebar -->
+</div>
+            </div>
+        </div>
+    </div>
+
+    <footer id="site-footer">
+        <div class="row-fluid">
+            <div class="span10 offset1">
+                <address>
+                    <p>
+                        This blog is proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                    </p>
+                    <p>
+                        <a href="http://github.com/jsliang/pelican-fresh/">Fresh</a> is a responsive theme designed by <a href="http://jsliang.com/">jsliang</a> and <a href="https://github.com/jsliang/pelican-fresh/graphs/contributors">contributors</a>.
+                        Special thanks to <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a> and <a href="http://getbootstrap.com/">Twitter Bootstrap</a>.
+                    </p>
+                </address>
+            </div>
+        </div>
+    </footer>
+
+    <script src="//code.jquery.com/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/2.3.2/js/bootstrap.min.js"></script>
 </body>
 </html>
