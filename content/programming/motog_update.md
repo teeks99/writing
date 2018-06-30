@@ -85,7 +85,7 @@ Now the directions indicated that if I wanted the Google Apps, I should install 
 
 Yikes, at first I was very stressed. I had already installed the main ROM and knew that as soon as I rebooted I'd be into it and wouldn't have another chance to install the GApps. After stopping and thinking about it for a second, I went back and tried installing that again. It seemed to not care that I had already tried (and failed) and was willing to try again. It even remembered my app selections. This time I went through and removed a lot of the more crufty stuff to trim it down....still not enough space. I tried a few more times, eventually getting down to a list where everything on it was stuff I'd definatly be using, and there still wasn't enough space. I even tried removing the backups that I'd previously made to see if it would help. It didn't seem to, I'm not sure if that is even on the same partition that the apps are installing to. I hope that backup isn't important. (In retrospect, I should have used adb pull to grab it off onto my PC) At this point, I noticed that it was outputting a log file, so I used adb to pull that off
 
-   adb adb pull /sdcard/open_gapps_log.txt
+    adb adb pull /sdcard/open_gapps_log.txt
 
 This file was great. It listed all the apps I was trying to install, how much space each took and how much space was available for them. 
 
