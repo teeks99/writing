@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="author" content="Tom" />
+    <meta name="robots" content="index, follow"/>
+
+    <meta property="og:title" content=""Building with a Ramdisk""/>
+    <meta property="og:url" content="https://teeks99.github.io/writing/building-with-a-ramdisk.html"/>
+    <meta property="og:site_name" content="Tom's Writing"/>
+    <meta property="og:type" content="article"/>
+
+    <link rel="canonical" href="https://teeks99.github.io/writing/building-with-a-ramdisk.html" />
+
+    <title>"Building with a Ramdisk" | Tom's Writing</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" type="text/css" />
+
+    <link rel="stylesheet" href="https://teeks99.github.io/writing/theme/css/main.css" type="text/css" />
+    <link href="https://teeks99.github.io/writing/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Tom's Writing Atom Feed" />
+
+    <script type="text/javascript">var switchTo5x=true;</script>
+    <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+    <script type="text/javascript">
+        stLight.options({
+            publisher: "",
+            doNotHash: false,
+            doNotCopy: false,
+            hashAddressBar: false
+        });
+    </script>
+</head>
+
+<body id="index">
+    <div class="row-fluid">
+        <div class="span10 offset1">
+            <header id="banner" >
+                <h1>
+                    <a href="https://teeks99.github.io/writing/">Tom's Writing </a>
+                </h1>
+                <nav class="navbar">
+                    <div class="navbar-inner">
+                        <ul class="nav">
+                            <li class="active"><a href="https://teeks99.github.io/writing/category/programming.html">programming</a></li>
+                        </ul>
+
+                    </div>
+                </nav>
+            </header><!-- /#banner -->
+        </div>
+    </div>
+
+    <div class="row-fluid">
+        <div class="span10 offset1">
+            <div class="row-fluid">
+<div class="span10 offset1">
+  <section>
+    <article>
+      <header>
+        <h1 class="entry-title">
+          <a href="https://teeks99.github.io/writing/building-with-a-ramdisk.html" rel="bookmark"
+             title="Permalink to "Building with a Ramdisk"">"Building with a Ramdisk"</a></h1>
+      </header>
+      <div class="entry-content">
+<footer class="post-info">
+    <address class="vcard author">
+        by <a class="url fn" href="https://teeks99.github.io/writing/author/tom.html">Tom</a>
+    </address>
+
+    in <a href="https://teeks99.github.io/writing/category/programming.html">programming</a>
+
+    on 2019-01-23
+
+
+
+
+    
+</footer><!-- /.post-info -->
+
+        <h1>Building with a Ramdisk</h1>
+<p>TL;DR: Ramdisks don't help build times.</p>
+<p>I've long been thinking that C++ build times were often disk IO limited. The
+biggest thing that lead me to think that was the speedup in build times when I 
+moved from spinning disks to SSDs. I don't have any numbers for it, but 
+anecdotally it was a big speedup. </p>
+<p>I recently got some time on Microsoft Azure's F72 VM, with 72 compute cores and
+144GB of RAM. Just to see it fly, I ran my <a href="https://github.com/teeks99/boost-release-windows">Boost Windows Build</a> on it, and was somewhat 
+underwhelmed by the results. This got me thinking that maybe the build was
+limited by the disk IO to the machine. Thinking about ways to solve this, I 
+remembered from my time in the 90s that there are pieces of software called 
+"Ramdisks" that let you have a virtual hard disk that is backed by system
+memory, so won't be affected by the typical limits of spinning or SSD disks.</p>
+<p>After looking around, I found an open source tool called 
+<a href="https://sourceforge.net/projects/imdisk-toolkit/">ImDisk</a> that allows you to
+create Ramdisks on windows (Linux comes with the <a href="https://www.cyberciti.biz/tips/what-is-devshm-and-its-practical-usage.html">/run/shm ramdisk</a>
+ enabled by default). </p>
+<p>Once I had that, I decided to run some tests. Since I work with 
+<a href="https://www.boost.org/">Boost</a> a lot, I'm using a couple different tests from
+there.</p>
+<ul>
+<li>Windows Binary Build - Each release, I 
+    <a href="https://github.com/teeks99/boost-release-windows">build and package</a> the 
+    windows binaries for boost. This runs several version of Visual Studio 
+    (msvc-10.0 through msvc-14.1) in several configurations: Debug/Release, 
+    mt/mtdll, static/dynamic, 32/64. This also packages up the build with 
+    <a href="https://www.7-zip.org/">7-zip</a> and
+    <a href="https://github.com/jrsoftware/issrc">Inno Setup</a>.</li>
+<li>Boost Regression Test Suite - I 
+    <a href="https://github.com/teeks99/boost-build">run this</a> regularly across several
+    machines (and a lot of 
+    <a href="https://github.com/teeks99/boost-cpp-docker">docker containers</a>), and have
+    good data on how long it takes to run.</li>
+</ul>
+<h2>Test Machines</h2>
+<ul>
+<li>F72<ul>
+<li>72 Core (Intel Xeon Platinum 8186 @ 2.70GHz)</li>
+<li>144GB Ram</li>
+<li>576GB Temp Storage</li>
+<li>$5.86/hr (Windows) $3.045/hr (Linux)</li>
+</ul>
+</li>
+<li>F16<ul>
+<li>16 Core</li>
+<li>32GB Ram</li>
+<li>256GB Temp Storage</li>
+<li>$1.53/hr (Windows) $.0796/hr (Linux)</li>
+</ul>
+</li>
+<li>Local VM<ul>
+<li>8 Core</li>
+<li>16GB Ram</li>
+<li>100GB Temp Storage</li>
+<li>$600 amortized over the last 2.5yrs + electricity</li>
+</ul>
+</li>
+</ul>
+<p>On the machines with more than 100GB of RAM, I created a ramdisk with 
+<a href="https://sourceforge.net/projects/imdisk-toolkit/">ImDisk</a>. For the 
+build/package tests, I ran my standard <a href="https://github.com/teeks99/boost-release-windows">build for windows releases</a> scripts for a build of 1.69.
+I ran (including creation of packages) from the ramdisk and from the azure 
+temp storage (a local SSD).  Because the smaller machines couldn't run the
+whole thing in the ramdisk, I ran single builds on them where possible. For the
+<a href="https://github.com/teeks99/boost-build">regression tests</a>, I was only able to 
+run in a ramdisk on the F72 machine, but was able to run under both linux and
+windows.</p>
+<h2>Results</h2>
+<h3>Boost release build</h3>
+<table>
+<thead>
+<tr>
+<th>Machine</th>
+<th>Ram Build, Pkg</th>
+<th>SSD Build, Pkg</th>
+<th>Ram Single</th>
+<th>SSD Single</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F72</td>
+<td>26:46, 1:01:55</td>
+<td>26:06, 43:24</td>
+<td>2:09</td>
+<td>2:08</td>
+</tr>
+<tr>
+<td>Local</td>
+<td></td>
+<td>1:49:30, 1:24:35</td>
+<td></td>
+<td>11:18</td>
+</tr>
+<tr>
+<td>F16 Cha</td>
+<td></td>
+<td>1:03:38, 1:25:29</td>
+<td>5:11</td>
+<td>5:21</td>
+</tr>
+</tbody>
+</table>
+<h3>Boost regression test</h3>
+<table>
+<thead>
+<tr>
+<th>Machine</th>
+<th>Win Ram Test</th>
+<th>Win SSD Test</th>
+<th>Linux Ram Test</th>
+<th>Linux SSD Test</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F72</td>
+<td>1:19:12</td>
+<td>1:12:35</td>
+<td>57:00</td>
+<td>57:00</td>
+</tr>
+<tr>
+<td>Local</td>
+<td></td>
+<td>2:31:24</td>
+<td></td>
+<td>2:06:00</td>
+</tr>
+<tr>
+<td>F16 Cha</td>
+<td></td>
+<td>1:57:35</td>
+<td></td>
+<td>1:15:35</td>
+</tr>
+</tbody>
+</table>
+<p>Initially when I ran, the Inno Setup task was taking much longer. However, I 
+went on a tangent exploration, and found the 
+<a href="https://github.com/teeks99/inno-test/">best settings for running parallelized</a>.</p>
+<h2>Conclusion</h2>
+<p>It turns out that ramdisks don't do a thing to build times. Clearly modern
+compilation isn't bound by storage I/O. On the other hand it was hard to get
+the F72 machine to spike all the CPUs. This could indicate that there just isn't
+enough parallelization in the build system. I know from watching that big swaths
+of the regression test is taken up by single threaded tasks (git updates,
+setup, etc.). I'd be curious to take a more modern build system like 
+<a href="https://ninja-build.org/">ninja</a> for a spin on an F72.</p>
+
+      </div><!-- /.entry-content -->
+
+    </article>
+  </section>
+</div>
+            </div>
+        </div>
+    </div>
+
+    <footer id="site-footer">
+        <div class="row-fluid">
+            <div class="span10 offset1">
+                <address>
+                    <p>
+                        This blog is proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                    </p>
+                    <p>
+                        <a href="http://github.com/jsliang/pelican-fresh/">Fresh</a> is a responsive theme designed by <a href="http://jsliang.com/">jsliang</a> and <a href="https://github.com/jsliang/pelican-fresh/graphs/contributors">contributors</a>.
+                        Special thanks to <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a> and <a href="http://getbootstrap.com/">Twitter Bootstrap</a>.
+                    </p>
+                </address>
+            </div>
+        </div>
+    </footer>
+
+    <script src="//code.jquery.com/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/2.3.2/js/bootstrap.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("table").attr("class","table table-condensed table-bordered");
+        });
+    </script>
+     
+</body>
+</html>

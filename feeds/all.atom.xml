@@ -1,5 +1,157 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Tom's Writing</title><link href="https://teeks99.github.io/writing/" rel="alternate"></link><link href="https://teeks99.github.io/writing/feeds/all.atom.xml" rel="self"></link><id>https://teeks99.github.io/writing/</id><updated>2018-06-21T22:00:00-05:00</updated><entry><title>"Updating a Moto G"</title><link href="https://teeks99.github.io/writing/updating-a-moto-g.html" rel="alternate"></link><published>2018-06-21T22:00:00-05:00</published><updated>2018-06-21T22:00:00-05:00</updated><author><name>Tom</name></author><id>tag:teeks99.github.io,2018-06-21:/writing/updating-a-moto-g.html</id><summary type="html">&lt;p&gt;Several years ago, I got my wife a Moto G phone. At the time $180 for an unlocked/no-contract phone was revolutionary, but now there are lots of cheap phones out there. Still it was nice that this was a near-default configuration.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Tom's Writing</title><link href="https://teeks99.github.io/writing/" rel="alternate"></link><link href="https://teeks99.github.io/writing/feeds/all.atom.xml" rel="self"></link><id>https://teeks99.github.io/writing/</id><updated>2019-01-23T22:00:00-06:00</updated><entry><title>"Building with a Ramdisk"</title><link href="https://teeks99.github.io/writing/building-with-a-ramdisk.html" rel="alternate"></link><published>2019-01-23T22:00:00-06:00</published><updated>2019-01-23T22:00:00-06:00</updated><author><name>Tom</name></author><id>tag:teeks99.github.io,2019-01-23:/writing/building-with-a-ramdisk.html</id><summary type="html">&lt;h1&gt;Building with a Ramdisk&lt;/h1&gt;
+&lt;p&gt;TL;DR: Ramdisks don't help build times.&lt;/p&gt;
+&lt;p&gt;I've long been thinking that C++ build times were often disk IO limited. The
+biggest thing that lead me to think that was the speedup in build times when I 
+moved from spinning disks to SSDs. I don't have …&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Building with a Ramdisk&lt;/h1&gt;
+&lt;p&gt;TL;DR: Ramdisks don't help build times.&lt;/p&gt;
+&lt;p&gt;I've long been thinking that C++ build times were often disk IO limited. The
+biggest thing that lead me to think that was the speedup in build times when I 
+moved from spinning disks to SSDs. I don't have any numbers for it, but 
+anecdotally it was a big speedup. &lt;/p&gt;
+&lt;p&gt;I recently got some time on Microsoft Azure's F72 VM, with 72 compute cores and
+144GB of RAM. Just to see it fly, I ran my &lt;a href="https://github.com/teeks99/boost-release-windows"&gt;Boost Windows Build&lt;/a&gt; on it, and was somewhat 
+underwhelmed by the results. This got me thinking that maybe the build was
+limited by the disk IO to the machine. Thinking about ways to solve this, I 
+remembered from my time in the 90s that there are pieces of software called 
+"Ramdisks" that let you have a virtual hard disk that is backed by system
+memory, so won't be affected by the typical limits of spinning or SSD disks.&lt;/p&gt;
+&lt;p&gt;After looking around, I found an open source tool called 
+&lt;a href="https://sourceforge.net/projects/imdisk-toolkit/"&gt;ImDisk&lt;/a&gt; that allows you to
+create Ramdisks on windows (Linux comes with the &lt;a href="https://www.cyberciti.biz/tips/what-is-devshm-and-its-practical-usage.html"&gt;/run/shm ramdisk&lt;/a&gt;
+ enabled by default). &lt;/p&gt;
+&lt;p&gt;Once I had that, I decided to run some tests. Since I work with 
+&lt;a href="https://www.boost.org/"&gt;Boost&lt;/a&gt; a lot, I'm using a couple different tests from
+there.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Windows Binary Build - Each release, I 
+    &lt;a href="https://github.com/teeks99/boost-release-windows"&gt;build and package&lt;/a&gt; the 
+    windows binaries for boost. This runs several version of Visual Studio 
+    (msvc-10.0 through msvc-14.1) in several configurations: Debug/Release, 
+    mt/mtdll, static/dynamic, 32/64. This also packages up the build with 
+    &lt;a href="https://www.7-zip.org/"&gt;7-zip&lt;/a&gt; and
+    &lt;a href="https://github.com/jrsoftware/issrc"&gt;Inno Setup&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Boost Regression Test Suite - I 
+    &lt;a href="https://github.com/teeks99/boost-build"&gt;run this&lt;/a&gt; regularly across several
+    machines (and a lot of 
+    &lt;a href="https://github.com/teeks99/boost-cpp-docker"&gt;docker containers&lt;/a&gt;), and have
+    good data on how long it takes to run.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Test Machines&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;F72&lt;ul&gt;
+&lt;li&gt;72 Core (Intel Xeon Platinum 8186 @ 2.70GHz)&lt;/li&gt;
+&lt;li&gt;144GB Ram&lt;/li&gt;
+&lt;li&gt;576GB Temp Storage&lt;/li&gt;
+&lt;li&gt;$5.86/hr (Windows) $3.045/hr (Linux)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;F16&lt;ul&gt;
+&lt;li&gt;16 Core&lt;/li&gt;
+&lt;li&gt;32GB Ram&lt;/li&gt;
+&lt;li&gt;256GB Temp Storage&lt;/li&gt;
+&lt;li&gt;$1.53/hr (Windows) $.0796/hr (Linux)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Local VM&lt;ul&gt;
+&lt;li&gt;8 Core&lt;/li&gt;
+&lt;li&gt;16GB Ram&lt;/li&gt;
+&lt;li&gt;100GB Temp Storage&lt;/li&gt;
+&lt;li&gt;$600 amortized over the last 2.5yrs + electricity&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;On the machines with more than 100GB of RAM, I created a ramdisk with 
+&lt;a href="https://sourceforge.net/projects/imdisk-toolkit/"&gt;ImDisk&lt;/a&gt;. For the 
+build/package tests, I ran my standard &lt;a href="https://github.com/teeks99/boost-release-windows"&gt;build for windows releases&lt;/a&gt; scripts for a build of 1.69.
+I ran (including creation of packages) from the ramdisk and from the azure 
+temp storage (a local SSD).  Because the smaller machines couldn't run the
+whole thing in the ramdisk, I ran single builds on them where possible. For the
+&lt;a href="https://github.com/teeks99/boost-build"&gt;regression tests&lt;/a&gt;, I was only able to 
+run in a ramdisk on the F72 machine, but was able to run under both linux and
+windows.&lt;/p&gt;
+&lt;h2&gt;Results&lt;/h2&gt;
+&lt;h3&gt;Boost release build&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Machine&lt;/th&gt;
+&lt;th&gt;Ram Build, Pkg&lt;/th&gt;
+&lt;th&gt;SSD Build, Pkg&lt;/th&gt;
+&lt;th&gt;Ram Single&lt;/th&gt;
+&lt;th&gt;SSD Single&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;F72&lt;/td&gt;
+&lt;td&gt;26:46, 1:01:55&lt;/td&gt;
+&lt;td&gt;26:06, 43:24&lt;/td&gt;
+&lt;td&gt;2:09&lt;/td&gt;
+&lt;td&gt;2:08&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Local&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;1:49:30, 1:24:35&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;11:18&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;F16 Cha&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;1:03:38, 1:25:29&lt;/td&gt;
+&lt;td&gt;5:11&lt;/td&gt;
+&lt;td&gt;5:21&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3&gt;Boost regression test&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Machine&lt;/th&gt;
+&lt;th&gt;Win Ram Test&lt;/th&gt;
+&lt;th&gt;Win SSD Test&lt;/th&gt;
+&lt;th&gt;Linux Ram Test&lt;/th&gt;
+&lt;th&gt;Linux SSD Test&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;F72&lt;/td&gt;
+&lt;td&gt;1:19:12&lt;/td&gt;
+&lt;td&gt;1:12:35&lt;/td&gt;
+&lt;td&gt;57:00&lt;/td&gt;
+&lt;td&gt;57:00&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Local&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;2:31:24&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;2:06:00&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;F16 Cha&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;1:57:35&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;1:15:35&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Initially when I ran, the Inno Setup task was taking much longer. However, I 
+went on a tangent exploration, and found the 
+&lt;a href="https://github.com/teeks99/inno-test/"&gt;best settings for running parallelized&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;It turns out that ramdisks don't do a thing to build times. Clearly modern
+compilation isn't bound by storage I/O. On the other hand it was hard to get
+the F72 machine to spike all the CPUs. This could indicate that there just isn't
+enough parallelization in the build system. I know from watching that big swaths
+of the regression test is taken up by single threaded tasks (git updates,
+setup, etc.). I'd be curious to take a more modern build system like 
+&lt;a href="https://ninja-build.org/"&gt;ninja&lt;/a&gt; for a spin on an F72.&lt;/p&gt;</content></entry><entry><title>"Updating a Moto G"</title><link href="https://teeks99.github.io/writing/updating-a-moto-g.html" rel="alternate"></link><published>2018-06-21T22:00:00-05:00</published><updated>2018-06-21T22:00:00-05:00</updated><author><name>Tom</name></author><id>tag:teeks99.github.io,2018-06-21:/writing/updating-a-moto-g.html</id><summary type="html">&lt;p&gt;Several years ago, I got my wife a Moto G phone. At the time $180 for an unlocked/no-contract phone was revolutionary, but now there are lots of cheap phones out there. Still it was nice that this was a near-default configuration.&lt;/p&gt;
 &lt;p&gt;Anyway, over a year ago, she updated to …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Several years ago, I got my wife a Moto G phone. At the time $180 for an unlocked/no-contract phone was revolutionary, but now there are lots of cheap phones out there. Still it was nice that this was a near-default configuration.&lt;/p&gt;
 &lt;p&gt;Anyway, over a year ago, she updated to a &lt;a href="https://www.gsmarena.com/google_pixel-8346.php"&gt;Google Pixel (5")&lt;/a&gt;. Since then the old Moto G had been sitting on my desk, waiting for something to happen with it. We recently took a trip to South America, and my wife didn't want to bring her Pixel, so I suggested she bring the Moto G. However, when I looked at it, I noticed that the case was swollen, like I've seen a couple times before when a battery vents some gas. (An &lt;a href="https://www.howtogeek.com/244846/what-to-do-when-your-phone-or-laptop-has-a-swollen-battery/"&gt;article&lt;/a&gt; from howtogeek about this phenomon, this phone had been charging for an unknown amount of time in this state.) At this point, I figured I could get a battery in a couple days from Amazon and swap it out before the trip.&lt;/p&gt;
 &lt;h2&gt;Changing the Battery&lt;/h2&gt;
@@ -19,151 +171,125 @@
 &lt;p&gt;Now I was all set to start.&lt;/p&gt;
 &lt;p&gt;I connected the phone to my computer by a USB cable, then set it to USB debugging. Strangely by clicking on the Settings -&amp;gt; About -&amp;gt; Build number &lt;strong&gt;seven times&lt;/strong&gt;, I guess they didn't want people to click it without having some idea of what they were doing.&lt;/p&gt;
 &lt;p&gt;I was then able to &lt;code&gt;adb reboot bootloader&lt;/code&gt;, which set the phone into a non-gui mode. From there I was able to run &lt;code&gt;sudo fastboot devices&lt;/code&gt; to see my phone. I then tried to run &lt;code&gt;fastboot oem device-info&lt;/code&gt; like was mentioned in the directions, but it didn't work. Even without that, I proceeded to contact &lt;a href="http://motorola-global-portal.custhelp.com/app/standalone/bootloader/unlock-your-device-a"&gt;Motorola Support&lt;/a&gt; to get the unlock code. They said that I instead needed to run &lt;code&gt;sudo fastboot oem get_unlock_data&lt;/code&gt; instead. With that, I got five lines of hex data out, that I had to concatenate together and submit to get the code. With the unlock code in hand, I ran &lt;code&gt;sudo fastboot oem unlock CODE_HERE&lt;/code&gt;. It responded with:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;...
+&lt;pre&gt;&lt;code&gt;...
 (bootloader) Unlock code = CODE_HERE
 
 (bootloader) Partition not found
 (bootloader) Phone is unlocked successfully!
 OKAY [  0.918s]
 finished. total time: 0.918s
-&lt;/pre&gt;&lt;/div&gt;
-
-
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Which despite the "Partition not found" seemed good. &lt;/p&gt;
 &lt;p&gt;I then rebooted and then back into the bootloader. Now I was ready to flash the recovery image.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo fastboot flash recovery twrp-3.2.1-0-titan.img 
-target reported max download size of &lt;span class="m"&gt;536870912&lt;/span&gt; bytes
-sending &lt;span class="s1"&gt;&amp;#39;recovery&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;6&lt;/span&gt; KB&lt;span class="o"&gt;)&lt;/span&gt;...
-OKAY &lt;span class="o"&gt;[&lt;/span&gt;  &lt;span class="m"&gt;0&lt;/span&gt;.036s&lt;span class="o"&gt;]&lt;/span&gt;
-writing &lt;span class="s1"&gt;&amp;#39;recovery&amp;#39;&lt;/span&gt;...
-&lt;span class="o"&gt;(&lt;/span&gt;bootloader&lt;span class="o"&gt;)&lt;/span&gt; Invalid boot image
-FAILED &lt;span class="o"&gt;(&lt;/span&gt;remote failure&lt;span class="o"&gt;)&lt;/span&gt;
-finished. total time: &lt;span class="m"&gt;0&lt;/span&gt;.072s
-&lt;/pre&gt;&lt;/div&gt;
-
-
+&lt;pre&gt;&lt;code&gt;$ sudo fastboot flash recovery twrp-3.2.1-0-titan.img 
+target reported max download size of 536870912 bytes
+sending 'recovery' (6 KB)...
+OKAY [  0.036s]
+writing 'recovery'...
+(bootloader) Invalid boot image
+FAILED (remote failure)
+finished. total time: 0.072s
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Aparently I had a corrupted download! Only 6KB. Luckily the flash command realized that this was corrupted...otherwise I would have had a nice slim brick. Let this be a lesson...always check the file hash! I got the correct file, verified with gpg, then uploaded.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo fastboot flash recovery twrp-3.2.1-0-titan.img 
-target reported max download size of &lt;span class="m"&gt;536870912&lt;/span&gt; bytes
-sending &lt;span class="s1"&gt;&amp;#39;recovery&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;8162&lt;/span&gt; KB&lt;span class="o"&gt;)&lt;/span&gt;...
-OKAY &lt;span class="o"&gt;[&lt;/span&gt;  &lt;span class="m"&gt;0&lt;/span&gt;.281s&lt;span class="o"&gt;]&lt;/span&gt;
-writing &lt;span class="s1"&gt;&amp;#39;recovery&amp;#39;&lt;/span&gt;...
-OKAY &lt;span class="o"&gt;[&lt;/span&gt;  &lt;span class="m"&gt;0&lt;/span&gt;.354s&lt;span class="o"&gt;]&lt;/span&gt;
-finished. total time: &lt;span class="m"&gt;0&lt;/span&gt;.635s
-&lt;/pre&gt;&lt;/div&gt;
-
-
+&lt;pre&gt;&lt;code&gt;$ sudo fastboot flash recovery twrp-3.2.1-0-titan.img 
+target reported max download size of 536870912 bytes
+sending 'recovery' (8162 KB)...
+OKAY [  0.281s]
+writing 'recovery'...
+OKAY [  0.354s]
+finished. total time: 0.635s
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;This worked much better.&lt;/p&gt;
 &lt;p&gt;Now I uploaded the images to the phone.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ adb push lineage-14.1-20180617-nightly-titan-signed.zip /sdcard/
-&lt;span class="m"&gt;4882&lt;/span&gt; KB/s &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;333346542&lt;/span&gt; bytes in &lt;span class="m"&gt;66&lt;/span&gt;.667s&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;pre&gt;&lt;code&gt;$ adb push lineage-14.1-20180617-nightly-titan-signed.zip /sdcard/
+4882 KB/s (333346542 bytes in 66.667s)
 $ adb push open_gapps-arm-7.1-aroma-20180620.zip /sdcard/
-&lt;span class="m"&gt;5932&lt;/span&gt; KB/s &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1201805700&lt;/span&gt; bytes in &lt;span class="m"&gt;197&lt;/span&gt;.828s&lt;span class="o"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
+5932 KB/s (1201805700 bytes in 197.828s)
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;After this, I don't remember all the steps...there was a bit of stress, so I'm going to try to remember the GUI stuff as well as I can.&lt;/p&gt;
 &lt;p&gt;The instructions recommended doing a backup, so I went through those steps in the GUI. I'm not sure what this is for, I don't have any data on this phone...do I need to backup the OS? &lt;/p&gt;
 &lt;p&gt;Next I Selected the "Install" option, and browsed to the lineage-titan image. I installed it, and it went smoothly. &lt;/p&gt;
 &lt;p&gt;Now the directions indicated that if I wanted the Google Apps, I should install them now. Somewhere in the documentation I read that Apps installed now go onto the system partition, which I thought would be a good idea since the phone doesn't have a ton of space...this could save space on the main partition. So I selected most of the options from the menu...at least all the stuff I use regurally. Skipped the foreign keyboards and some garbage like Google Newstand. Then I ran the install command. After a few seconds, it came back with a message saying that there wasn't enough space and the installer was exiting.&lt;/p&gt;
 &lt;p&gt;Yikes, at first I was very stressed. I had already installed the main ROM and knew that as soon as I rebooted I'd be into it and wouldn't have another chance to install the GApps. After stopping and thinking about it for a second, I went back and tried installing that again. It seemed to not care that I had already tried (and failed) and was willing to try again. It even remembered my app selections. This time I went through and removed a lot of the more crufty stuff to trim it down....still not enough space. I tried a few more times, eventually getting down to a list where everything on it was stuff I'd definatly be using, and there still wasn't enough space. I even tried removing the backups that I'd previously made to see if it would help. It didn't seem to, I'm not sure if that is even on the same partition that the apps are installing to. I hope that backup isn't important. (In retrospect, I should have used adb pull to grab it off onto my PC) At this point, I noticed that it was outputting a log file, so I used adb to pull that off&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;adb adb pull /sdcard/open_gapps_log.txt
-&lt;/pre&gt;&lt;/div&gt;
-
-
+&lt;pre&gt;&lt;code&gt;adb adb pull /sdcard/open_gapps_log.txt
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;This file was great. It listed all the apps I was trying to install, how much space each took and how much space was available for them. &lt;/p&gt;
 &lt;p&gt;Also at this point, I realized that not installing any particular app wasn't going to be an issue, I could just get it through google play. So I got rid of a couple big ones: maps, docs, sheets and was under the size limit. Now the command worked! &lt;/p&gt;
 &lt;p&gt;In retrospect, I would have gone with a much smaller install. Maybe just the play store and play services? Everything else is getting regular updates, and I assume these updates have to go on the normal partition, even if it was perviously on the system partition...so any space saving I get here will be temporary. &lt;/p&gt;
 &lt;p&gt;After this I was able to reboot (startup took a while) and I was in to a running Lineage!&lt;/p&gt;
 &lt;p&gt;It was little stressful when I was worried I might be messing things up, but that just makes victory even sweeter in the end. All in all, it was a fun little project and only took me an hour or two. There wasn't much that was super advanced here, I think I could sit down with just about anybody and talk them through doing it to their phone. Hopefully I can get more converts to using a non-stock rom!&lt;/p&gt;
 &lt;p&gt;Thanks to all the volunteers at lineage (and TWRP/Gapps) for their great software and good documentation!&lt;/p&gt;</content></entry><entry><title>"Working with Props Files"</title><link href="https://teeks99.github.io/writing/working-with-props-files.html" rel="alternate"></link><published>2018-03-06T12:08:56-06:00</published><updated>2018-03-06T12:08:56-06:00</updated><author><name>Tom</name></author><id>tag:teeks99.github.io,2018-03-06:/writing/working-with-props-files.html</id><summary type="html">&lt;p&gt;Visual Studio/MSBuild props files are handy little settings files that can be included&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;lt;Import Project=&amp;quot;path\to\file.props&amp;quot; /&amp;gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
+&lt;pre&gt;&lt;code&gt;&amp;lt;Import Project="path\to\file.props" /&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;in vcxproj files or other props files.&lt;/p&gt;
 &lt;p&gt;These can simply define variables&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;utf-8&amp;quot;?&amp;gt;&lt;/span&gt;
-&lt;span class="nt"&gt;&amp;lt;Project&lt;/span&gt; &lt;span class="na"&gt;DefaultTargets=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Build&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;ToolsVersion=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;4.0&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;xmlns=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;http://schemas.microsoft.com/developer …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;Visual Studio/MSBuild props files are handy little settings files that can be included&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;lt;Import Project=&amp;quot;path\to\file.props&amp;quot; /&amp;gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
+&lt;pre&gt;&lt;code&gt;&amp;lt;?xml version="1.0" encoding="utf-8"?&amp;gt;
+&amp;lt;Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer …&lt;/code&gt;&lt;/pre&gt;</summary><content type="html">&lt;p&gt;Visual Studio/MSBuild props files are handy little settings files that can be included&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;Import Project="path\to\file.props" /&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;in vcxproj files or other props files.&lt;/p&gt;
 &lt;p&gt;These can simply define variables&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;utf-8&amp;quot;?&amp;gt;&lt;/span&gt;
-&lt;span class="nt"&gt;&amp;lt;Project&lt;/span&gt; &lt;span class="na"&gt;DefaultTargets=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Build&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;ToolsVersion=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;4.0&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;xmlns=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;http://schemas.microsoft.com/developer/msbuild/2003&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class="nt"&gt;&amp;lt;PropertyGroup&amp;gt;&lt;/span&gt;
-    &lt;span class="nt"&gt;&amp;lt;MyIncludePath&amp;gt;&lt;/span&gt;C:/Path/To/Include&lt;span class="nt"&gt;&amp;lt;/MyIncludePath&amp;gt;&lt;/span&gt;
-    &lt;span class="nt"&gt;&amp;lt;MyLibPath&amp;gt;&lt;/span&gt;C:/Path/To/Lib&lt;span class="nt"&gt;&amp;lt;/MyLibPath&amp;gt;&lt;/span&gt;
-  &lt;span class="nt"&gt;&amp;lt;/PropertyGroup&amp;gt;&lt;/span&gt;
-&lt;span class="nt"&gt;&amp;lt;/Project&amp;gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
+&lt;pre&gt;&lt;code&gt;&amp;lt;?xml version="1.0" encoding="utf-8"?&amp;gt;
+&amp;lt;Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003"&amp;gt;
+  &amp;lt;PropertyGroup&amp;gt;
+    &amp;lt;MyIncludePath&amp;gt;C:/Path/To/Include&amp;lt;/MyIncludePath&amp;gt;
+    &amp;lt;MyLibPath&amp;gt;C:/Path/To/Lib&amp;lt;/MyLibPath&amp;gt;
+  &amp;lt;/PropertyGroup&amp;gt;
+&amp;lt;/Project&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Which can then be used in a .vcxproj that has already imported that props file with the variables &lt;code&gt;$(MyIncludePath)&lt;/code&gt; and &lt;code&gt;$(MyLibPath)&lt;/code&gt;, for example:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;&amp;lt;ClCompile&amp;gt;&lt;/span&gt;
-  &lt;span class="nt"&gt;&amp;lt;AdditionalIncludeDirectories&amp;gt;&lt;/span&gt;..\local\inc;$(MyIncludePath);%(AdditionalIncludeDirectories)&lt;span class="nt"&gt;&amp;lt;/AdditionalIncludeDirectories&amp;gt;&lt;/span&gt;
-  &lt;span class="nt"&gt;&amp;lt;RuntimeLibrary&amp;gt;&lt;/span&gt;MultiThreadedDebug&lt;span class="nt"&gt;&amp;lt;/RuntimeLibrary&amp;gt;&lt;/span&gt;
-&lt;span class="nt"&gt;&amp;lt;/ClCompile&amp;gt;&lt;/span&gt;
-&lt;span class="nt"&gt;&amp;lt;Link&amp;gt;&lt;/span&gt;
-  &lt;span class="nt"&gt;&amp;lt;SubSystem&amp;gt;&lt;/span&gt;Console&lt;span class="nt"&gt;&amp;lt;/SubSystem&amp;gt;&lt;/span&gt;
-  &lt;span class="nt"&gt;&amp;lt;AdditionalLibraryDirectories&amp;gt;&lt;/span&gt;$(MyLibPath);%(AdditionalLibraryDirectories)&lt;span class="nt"&gt;&amp;lt;/AdditionalLibraryDirectories&amp;gt;&lt;/span&gt;
-  &lt;span class="nt"&gt;&amp;lt;AdditionalDependencies&amp;gt;&lt;/span&gt;%(AdditionalDependencies)&lt;span class="nt"&gt;&amp;lt;/AdditionalDependencies&amp;gt;&lt;/span&gt;
-&lt;span class="nt"&gt;&amp;lt;/Link&amp;gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
+&lt;pre&gt;&lt;code&gt;&amp;lt;ClCompile&amp;gt;
+  &amp;lt;AdditionalIncludeDirectories&amp;gt;..\local\inc;$(MyIncludePath);%(AdditionalIncludeDirectories)&amp;lt;/AdditionalIncludeDirectories&amp;gt;
+  &amp;lt;RuntimeLibrary&amp;gt;MultiThreadedDebug&amp;lt;/RuntimeLibrary&amp;gt;
+&amp;lt;/ClCompile&amp;gt;
+&amp;lt;Link&amp;gt;
+  &amp;lt;SubSystem&amp;gt;Console&amp;lt;/SubSystem&amp;gt;
+  &amp;lt;AdditionalLibraryDirectories&amp;gt;$(MyLibPath);%(AdditionalLibraryDirectories)&amp;lt;/AdditionalLibraryDirectories&amp;gt;
+  &amp;lt;AdditionalDependencies&amp;gt;%(AdditionalDependencies)&amp;lt;/AdditionalDependencies&amp;gt;
+&amp;lt;/Link&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;These variables can build on each other as well, a line further down the file can use variables from a line above it. &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;&amp;lt;PropertyGroup&amp;gt;&lt;/span&gt;
-  &lt;span class="nt"&gt;&amp;lt;FirstPath&amp;gt;&lt;/span&gt;path/to/first&lt;span class="nt"&gt;&amp;lt;/FirstPath&amp;gt;&lt;/span&gt;
-  &lt;span class="nt"&gt;&amp;lt;SecondPath&amp;gt;&lt;/span&gt;path/to/second&lt;span class="nt"&gt;&amp;lt;/SecondPath&amp;gt;&lt;/span&gt;
-  &lt;span class="nt"&gt;&amp;lt;AllPaths&amp;gt;&lt;/span&gt;$(FirstPath);$(SecondPath)&lt;span class="nt"&gt;&amp;lt;/AllPaths&amp;gt;&lt;/span&gt;
-&lt;span class="nt"&gt;&amp;lt;/PropertyGroup&amp;gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
+&lt;pre&gt;&lt;code&gt;&amp;lt;PropertyGroup&amp;gt;
+  &amp;lt;FirstPath&amp;gt;path/to/first&amp;lt;/FirstPath&amp;gt;
+  &amp;lt;SecondPath&amp;gt;path/to/second&amp;lt;/SecondPath&amp;gt;
+  &amp;lt;AllPaths&amp;gt;$(FirstPath);$(SecondPath)&amp;lt;/AllPaths&amp;gt;
+&amp;lt;/PropertyGroup&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Groups, like &lt;a href="https://docs.microsoft.com/en-us/visualstudio/msbuild/propertygroup-element-msbuild"&gt;PropertyGroup&lt;/a&gt;, &lt;a href="https://docs.microsoft.com/en-us/visualstudio/msbuild/itemdefinitiongroup-element-msbuild"&gt;ItemDefinitionGroup&lt;/a&gt;s, etc. can also have &lt;a href="https://docs.microsoft.com/en-us/visualstudio/msbuild/msbuild-conditions"&gt;Conditions&lt;/a&gt;. These conditions often take the form of &lt;code&gt;Condition="'stringA'=='stringB'"&lt;/code&gt;, which can be very useful when using variables, including those added by msbuild/visual studio.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;&amp;lt;PropertyGroup&lt;/span&gt; &lt;span class="na"&gt;Condition=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&amp;#39;$(PlatformToolset)&amp;#39;==&amp;#39;v100&amp;#39;&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class="nt"&gt;&amp;lt;MyVersion&amp;gt;&lt;/span&gt;msvc-10.0&lt;span class="nt"&gt;&amp;lt;/MyVersion&amp;gt;&lt;/span&gt;
-&lt;span class="nt"&gt;&amp;lt;/PropertyGroup&amp;gt;&lt;/span&gt;
-&lt;span class="nt"&gt;&amp;lt;PropertyGroup&lt;/span&gt; &lt;span class="na"&gt;Condition=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&amp;#39;$(PlatformToolset)&amp;#39;==&amp;#39;v140&amp;#39;&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class="nt"&gt;&amp;lt;MyVersion&amp;gt;&lt;/span&gt;msvc-14.0&lt;span class="nt"&gt;&amp;lt;/MyVersion&amp;gt;&lt;/span&gt;
-&lt;span class="nt"&gt;&amp;lt;/PropertyGroup&amp;gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
+&lt;pre&gt;&lt;code&gt;&amp;lt;PropertyGroup Condition="'$(PlatformToolset)'=='v100'"&amp;gt;
+  &amp;lt;MyVersion&amp;gt;msvc-10.0&amp;lt;/MyVersion&amp;gt;
+&amp;lt;/PropertyGroup&amp;gt;
+&amp;lt;PropertyGroup Condition="'$(PlatformToolset)'=='v140'"&amp;gt;
+  &amp;lt;MyVersion&amp;gt;msvc-14.0&amp;lt;/MyVersion&amp;gt;
+&amp;lt;/PropertyGroup&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;The above will set &lt;code&gt;MyVersion&lt;/code&gt; to a value specific to the platform toolset that visual studio is using to build the code. This is defined by default in .vcxproj files. Because it gets defined in the .vcxproj, using it requires that the props file isn't imported until after the variable it depends on has been defined. Where this happens isn't particularly ovbious, so a good rule of thumb is to import user props files after the provided `&lt;PropertyGroup Label="UserMacros" /&gt; line. &lt;/p&gt;
 &lt;p&gt;It is common that one would like to append new values to existing variables like for the include path, library search path, etc. Look through the &lt;a href="https://docs.microsoft.com/en-us/visualstudio/msbuild/cl-task"&gt;CL Task Parameters&lt;/a&gt; and &lt;a href="https://docs.microsoft.com/en-us/visualstudio/msbuild/link-task"&gt;Link Task Parameters&lt;/a&gt; for more. Since these already exist they need to be appended to instead of set. For example:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;&amp;lt;AdditionalIncludeDirectories&amp;gt;&lt;/span&gt;path/to/dir;$(PathInVar);%(AdditionalIncludeDirectories)&lt;span class="nt"&gt;&amp;lt;/AdditionalIncludeDirectories&amp;gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
+&lt;pre&gt;&lt;code&gt;&amp;lt;AdditionalIncludeDirectories&amp;gt;path/to/dir;$(PathInVar);%(AdditionalIncludeDirectories)&amp;lt;/AdditionalIncludeDirectories&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Here the name of the variable is included at the end with a percent sign &lt;code&gt;%&lt;/code&gt; in front of it. That tells it to use the existing one at the end. &lt;/p&gt;
 &lt;p&gt;For the CL and Link options, they cannot be set as variables in property groups, they need to match up with the existing variables in the heirarchy. Specifically:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;&amp;lt;ItemDefinitionGroup&amp;gt;&lt;/span&gt;
-  &lt;span class="nt"&gt;&amp;lt;ClCompile&amp;gt;&lt;/span&gt;
-    &lt;span class="nt"&gt;&amp;lt;AdditionalIncludeDirectories&amp;gt;&lt;/span&gt;path/to/dir;$(PathInVar);%(AdditionalIncludeDirectories)&lt;span class="nt"&gt;&amp;lt;/AdditionalIncludeDirectories&amp;gt;&lt;/span&gt;
-    &lt;span class="nt"&gt;&amp;lt;PreprocessorDefinitions&amp;gt;&lt;/span&gt;SOMETHING_DEFINED;%(PreprocessorDefinitions)&lt;span class="nt"&gt;&amp;lt;/PreprocessorDefinitions&amp;gt;&lt;/span&gt;
-  &lt;span class="nt"&gt;&amp;lt;/ClCompile&amp;gt;&lt;/span&gt;
-  &lt;span class="nt"&gt;&amp;lt;Link&amp;gt;&lt;/span&gt;
-    &lt;span class="nt"&gt;&amp;lt;AdditionalLibraryDirectories&amp;gt;&lt;/span&gt;path/to/libs;$(PathInVar);%(AdditionalLibraryDirectories)&lt;span class="nt"&gt;&amp;lt;/AdditionalLibraryDirectories&amp;gt;&lt;/span&gt;
-    &lt;span class="nt"&gt;&amp;lt;AdditionalDependencies&amp;gt;&lt;/span&gt;my.lib;%(AdditionalDependencies)&lt;span class="nt"&gt;&amp;lt;/AdditionalDependencies&amp;gt;&lt;/span&gt;
-  &lt;span class="nt"&gt;&amp;lt;/Link&amp;gt;&lt;/span&gt;
-&lt;span class="nt"&gt;&amp;lt;/ItemDefinitionGroup&amp;gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
+&lt;pre&gt;&lt;code&gt;&amp;lt;ItemDefinitionGroup&amp;gt;
+  &amp;lt;ClCompile&amp;gt;
+    &amp;lt;AdditionalIncludeDirectories&amp;gt;path/to/dir;$(PathInVar);%(AdditionalIncludeDirectories)&amp;lt;/AdditionalIncludeDirectories&amp;gt;
+    &amp;lt;PreprocessorDefinitions&amp;gt;SOMETHING_DEFINED;%(PreprocessorDefinitions)&amp;lt;/PreprocessorDefinitions&amp;gt;
+  &amp;lt;/ClCompile&amp;gt;
+  &amp;lt;Link&amp;gt;
+    &amp;lt;AdditionalLibraryDirectories&amp;gt;path/to/libs;$(PathInVar);%(AdditionalLibraryDirectories)&amp;lt;/AdditionalLibraryDirectories&amp;gt;
+    &amp;lt;AdditionalDependencies&amp;gt;my.lib;%(AdditionalDependencies)&amp;lt;/AdditionalDependencies&amp;gt;
+  &amp;lt;/Link&amp;gt;
+&amp;lt;/ItemDefinitionGroup&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;It can also look at empty/unset variables and set default options for them. For example, we want to have a &lt;code&gt;libmy.lib&lt;/code&gt; named &lt;code&gt;libmyd.lib&lt;/code&gt; if it is being built with the &lt;code&gt;$(MyLibConf)&lt;/code&gt; variable set to Debug. However, it is common that users who are building a project with the &lt;code&gt;$(Configuration)&lt;/code&gt; set to Debug will also want this, and we don't want them to be forced to specify our &lt;code&gt;$(MyLibConf)&lt;/code&gt; in this case. So we can detect if it is empty &lt;em&gt;and&lt;/em&gt; the &lt;code&gt;$(Configuration)&lt;/code&gt; is set to debug, then add the &lt;code&gt;d&lt;/code&gt; suffix. &lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nt"&gt;&amp;lt;PropertyGroup&lt;/span&gt; &lt;span class="na"&gt;Condition=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&amp;#39;$(MyLibConf)&amp;#39;==&amp;#39;&amp;#39; and &amp;#39;$(Configuration)&amp;#39;==&amp;#39;Debug&amp;#39;&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class="nt"&gt;&amp;lt;MyLibConf&amp;gt;&lt;/span&gt;Debug&lt;span class="nt"&gt;&amp;lt;/MyLibConf&amp;gt;&lt;/span&gt;
-&lt;span class="nt"&gt;&amp;lt;/PropertyGroup&amp;gt;&lt;/span&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;PropertyGroup Condition="'$(MyLibConf)'=='' and '$(Configuration)'=='Debug'"&amp;gt;
+  &amp;lt;MyLibConf&amp;gt;Debug&amp;lt;/MyLibConf&amp;gt;
+&amp;lt;/PropertyGroup&amp;gt;
 
-&lt;span class="nt"&gt;&amp;lt;PropertyGroup&lt;/span&gt; &lt;span class="na"&gt;Condition=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&amp;#39;$(MyLibConf)&amp;#39;==&amp;#39;Debug&amp;#39;&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class="nt"&gt;&amp;lt;MyLibSuffix&amp;gt;&lt;/span&gt;d&lt;span class="nt"&gt;&amp;lt;/MyLibSuffix&amp;gt;&lt;/span&gt;
-&lt;span class="nt"&gt;&amp;lt;/PropertyGroup&amp;gt;&lt;/span&gt;
+&amp;lt;PropertyGroup Condition="'$(MyLibConf)'=='Debug'"&amp;gt;
+  &amp;lt;MyLibSuffix&amp;gt;d&amp;lt;/MyLibSuffix&amp;gt;
+&amp;lt;/PropertyGroup&amp;gt;
 
-&lt;span class="nt"&gt;&amp;lt;PropertyGroup&amp;gt;&lt;/span&gt;
-  &lt;span class="nt"&gt;&amp;lt;MyLibName&amp;gt;&lt;/span&gt;libmy$(MyLibSuffix).lib&lt;span class="nt"&gt;&amp;lt;/MyLibName&amp;gt;&lt;/span&gt;
-&lt;span class="nt"&gt;&amp;lt;/PropertyGroup&amp;gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</content></entry></feed>
+&amp;lt;PropertyGroup&amp;gt;
+  &amp;lt;MyLibName&amp;gt;libmy$(MyLibSuffix).lib&amp;lt;/MyLibName&amp;gt;
+&amp;lt;/PropertyGroup&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;</content></entry></feed>

@@ -57,7 +57,42 @@
             <div class="row-fluid">
 <div class="span9">
                 <section>
-                    <ol id="posts-list" class="hfeed" start="1">
+                    <ol id="posts-list" class="hfeed" start="2">
+                    <li>
+                        <article>
+                            <header>
+                                <h1 class="entry-title">
+                                    <a href="https://teeks99.github.io/writing/building-with-a-ramdisk.html" rel="bookmark" title="Permalink to "Building with a Ramdisk"">
+                                       "Building with a Ramdisk"
+                                    </a>
+                                </h1>
+                            </header>
+                            <div class="entry-content">
+<footer class="post-info">
+    <address class="vcard author">
+        by <a class="url fn" href="https://teeks99.github.io/writing/author/tom.html">Tom</a>
+    </address>
+
+    in <a href="https://teeks99.github.io/writing/category/programming.html">programming</a>
+
+    on 2019-01-23
+
+
+
+
+    
+</footer><!-- /.post-info -->                                <h1>Building with a Ramdisk</h1>
+<p>TL;DR: Ramdisks don't help build times.</p>
+<p>I've long been thinking that C++ build times were often disk IO limited. The
+biggest thing that lead me to think that was the speedup in build times when I 
+moved from spinning disks to SSDs. I don't have …</p>
+                                <p class="readmore">
+                                    <a class="btn btn-small btn-info" href="https://teeks99.github.io/writing/building-with-a-ramdisk.html">Read more...</a>
+                                </p>
+                            </div><!-- /.entry-content -->
+                            <hr/>
+                        </article>
+                    </li>
                     <li>
                         <article>
                             <header>
@@ -114,14 +149,12 @@
 
     
 </footer><!-- /.post-info -->                                <p>Visual Studio/MSBuild props files are handy little settings files that can be included</p>
-<div class="highlight"><pre><span></span>&lt;Import Project=&quot;path\to\file.props&quot; /&gt;
-</pre></div>
-
-
+<pre><code>&lt;Import Project="path\to\file.props" /&gt;
+</code></pre>
 <p>in vcxproj files or other props files.</p>
 <p>These can simply define variables</p>
-<div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
-<span class="nt">&lt;Project</span> <span class="na">DefaultTargets=</span><span class="s">&quot;Build&quot;</span> <span class="na">ToolsVersion=</span><span class="s">&quot;4.0&quot;</span> <span class="na">xmlns=</span><span class="s">&quot;http://schemas.microsoft.com/developer …</span></pre></div>
+<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer …</code></pre>
                                 <p class="readmore">
                                     <a class="btn btn-small btn-info" href="https://teeks99.github.io/writing/working-with-props-files.html">Read more...</a>
                                 </p>
@@ -185,5 +218,12 @@
 
     <script src="//code.jquery.com/jquery.min.js"></script>
     <script src="//netdna.bootstrapcdn.com/bootstrap/2.3.2/js/bootstrap.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("table").attr("class","table table-condensed table-bordered");
+        });
+    </script>
+     
 </body>
 </html>
