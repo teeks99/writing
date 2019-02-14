@@ -84,24 +84,24 @@
 </footer><!-- /.post-info -->                                <h1>Using Enumerations in C++</h1>
 <h2>The problem</h2>
 <p>In olden times, C++ enums were the same as C enums. That is they had global scope for the names created:</p>
-<pre><code class="C++">#include &lt;iostream&gt;
+<div class="codehilite"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
 
-enum SIM_MODE
-{
-   INITIALIZE = 1,
-   RUN = 2,
-   RESET = 3,
-   PAUSE = 4
-};
+<span class="k">enum</span> <span class="n">SIM_MODE</span>
+<span class="p">{</span>
+   <span class="n">INITIALIZE</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+   <span class="n">RUN</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+   <span class="n">RESET</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+   <span class="n">PAUSE</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="p">};</span>
 
-enum CONTROL
-{
-   START = 1,
-   STOP = 2,
-   PAUSE = 3
-};
+<span class="k">enum</span> <span class="n">CONTROL</span>
+<span class="p">{</span>
+   <span class="n">START</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+   <span class="n">STOP</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+   <span class="n">PAUSE</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="p">};</span>
 
-int main(int …</code></pre>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int …</span></pre></div>
                                 <p class="readmore">
                                     <a class="btn btn-small btn-info" href="https://teeks99.github.io/writing/c-enums.html">Read more...</a>
                                 </p>
@@ -200,12 +200,14 @@ moved from spinning disks to SSDs. I don't have …</p>
 
     
 </footer><!-- /.post-info -->                                <p>Visual Studio/MSBuild props files are handy little settings files that can be included</p>
-<pre><code>&lt;Import Project="path\to\file.props" /&gt;
-</code></pre>
+<div class="codehilite"><pre><span></span>&lt;Import Project=&quot;path\to\file.props&quot; /&gt;
+</pre></div>
+
+
 <p>in vcxproj files or other props files.</p>
 <p>These can simply define variables</p>
-<pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
-&lt;Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer …</code></pre>
+<div class="codehilite"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="nt">&lt;Project</span> <span class="na">DefaultTargets=</span><span class="s">&quot;Build&quot;</span> <span class="na">ToolsVersion=</span><span class="s">&quot;4.0&quot;</span> <span class="na">xmlns=</span><span class="s">&quot;http://schemas.microsoft.com/developer …</span></pre></div>
                                 <p class="readmore">
                                     <a class="btn btn-small btn-info" href="https://teeks99.github.io/writing/working-with-props-files.html">Read more...</a>
                                 </p>

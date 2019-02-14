@@ -82,37 +82,38 @@
         <h1>Using Enumerations in C++</h1>
 <h2>The problem</h2>
 <p>In olden times, C++ enums were the same as C enums. That is they had global scope for the names created:</p>
-<pre><code class="C++">#include &lt;iostream&gt;
+<div class="codehilite"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
 
-enum SIM_MODE
-{
-   INITIALIZE = 1,
-   RUN = 2,
-   RESET = 3,
-   PAUSE = 4
-};
+<span class="k">enum</span> <span class="n">SIM_MODE</span>
+<span class="p">{</span>
+   <span class="n">INITIALIZE</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+   <span class="n">RUN</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+   <span class="n">RESET</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+   <span class="n">PAUSE</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="p">};</span>
 
-enum CONTROL
-{
-   START = 1,
-   STOP = 2,
-   PAUSE = 3
-};
+<span class="k">enum</span> <span class="n">CONTROL</span>
+<span class="p">{</span>
+   <span class="n">START</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+   <span class="n">STOP</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+   <span class="n">PAUSE</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="p">};</span>
 
-int main(int argc, char* argv[])
-{
-   SIM_MODE mode = INITIALIZE;
-   CONTROL control = START;
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+   <span class="n">SIM_MODE</span> <span class="n">mode</span> <span class="o">=</span> <span class="n">INITIALIZE</span><span class="p">;</span>
+   <span class="n">CONTROL</span> <span class="n">control</span> <span class="o">=</span> <span class="n">START</span><span class="p">;</span>
 
-   //... time passes
+   <span class="c1">//... time passes</span>
 
-   control = PAUSE;
+   <span class="n">control</span> <span class="o">=</span> <span class="n">PAUSE</span><span class="p">;</span>
 
-   std::cout &lt;&lt; control &lt;&lt; std::endl;
+   <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">control</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 
-   return 0;
-}
-</code></pre>
+   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
 
 <p>Gives an error:
 <code>main.cpp(16): error C2365: 'PAUSE': redefinition; previous definition was 'enumerator'</code></p>
@@ -121,92 +122,96 @@ int main(int argc, char* argv[])
 get out of hand quite quickly. Yuck!</p>
 <h2>C++ Enums</h2>
 <p>In C++ (98/03) we solved this by adding namespaces around the enums (). This solves the problem, but has some redundancy:</p>
-<pre><code class="C++">namespace SimMode
-{
-   enum SIM_MODE
-   {
-      INITIALIZE = 1,
-      RUN = 2,
-      RESET = 3,
-      PAUSE = 4
-   };
-};
+<div class="codehilite"><pre><span></span><span class="k">namespace</span> <span class="n">SimMode</span>
+<span class="p">{</span>
+   <span class="k">enum</span> <span class="n">SIM_MODE</span>
+   <span class="p">{</span>
+      <span class="n">INITIALIZE</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="n">RUN</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+      <span class="n">RESET</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+      <span class="n">PAUSE</span> <span class="o">=</span> <span class="mi">4</span>
+   <span class="p">};</span>
+<span class="p">};</span>
 
-namespace Control
-{
-   enum CONTROL
-   {
-      START = 1,
-      STOP = 2,
-      PAUSE = 3
-   };
-};
+<span class="k">namespace</span> <span class="n">Control</span>
+<span class="p">{</span>
+   <span class="k">enum</span> <span class="n">CONTROL</span>
+   <span class="p">{</span>
+      <span class="n">START</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="n">STOP</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+      <span class="n">PAUSE</span> <span class="o">=</span> <span class="mi">3</span>
+   <span class="p">};</span>
+<span class="p">};</span>
 
-int main(int argc, char* argv[])
-{
-   SimMode::SIM_MODE mode = SimMode::INITIALIZE;
-   Control::CONTROL control = Control::START;
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+   <span class="n">SimMode</span><span class="o">::</span><span class="n">SIM_MODE</span> <span class="n">mode</span> <span class="o">=</span> <span class="n">SimMode</span><span class="o">::</span><span class="n">INITIALIZE</span><span class="p">;</span>
+   <span class="n">Control</span><span class="o">::</span><span class="n">CONTROL</span> <span class="n">control</span> <span class="o">=</span> <span class="n">Control</span><span class="o">::</span><span class="n">START</span><span class="p">;</span>
 
-   //... time passes
+   <span class="c1">//... time passes</span>
 
-   control = Control::PAUSE;
+   <span class="n">control</span> <span class="o">=</span> <span class="n">Control</span><span class="o">::</span><span class="n">PAUSE</span><span class="p">;</span>
 
-   std::cout &lt;&lt; control &lt;&lt; std::endl;
-   // Correctly outputs: 3
+   <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">control</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+   <span class="c1">// Correctly outputs: 3</span>
 
-   return 0;
-}
-</code></pre>
+   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
 
 <p>This could also have been put in a class/struct instead of a namespace. Useful if you want to add methods, like 
 <code>string GetModeName()</code>. </p>
 <h2>Modern C++</h2>
 <p>Finally, with C++11 the feature was baked into the language with the <code>enum class</code>. </p>
-<pre><code class="C++">enum class SimMode
-{
-   INITIALIZE = 1,
-   RUN = 2,
-   RESET = 3,
-   PAUSE = 4
-};
+<div class="codehilite"><pre><span></span><span class="k">enum</span> <span class="k">class</span> <span class="nc">SimMode</span>
+<span class="p">{</span>
+   <span class="n">INITIALIZE</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+   <span class="n">RUN</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+   <span class="n">RESET</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+   <span class="n">PAUSE</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="p">};</span>
 
-enum class Control
-{
-   START = 1,
-   STOP = 2,
-   PAUSE = 3
-};
+<span class="k">enum</span> <span class="k">class</span> <span class="nc">Control</span>
+<span class="p">{</span>
+   <span class="n">START</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+   <span class="n">STOP</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+   <span class="n">PAUSE</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="p">};</span>
 
-int main(int argc, char* argv[])
-{
-   SimMode mode = SimMode::INITIALIZE;
-   Control control = Control::START;
+<span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span><span class="o">*</span> <span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+   <span class="n">SimMode</span> <span class="n">mode</span> <span class="o">=</span> <span class="n">SimMode</span><span class="o">::</span><span class="n">INITIALIZE</span><span class="p">;</span>
+   <span class="n">Control</span> <span class="n">control</span> <span class="o">=</span> <span class="n">Control</span><span class="o">::</span><span class="n">START</span><span class="p">;</span>
 
-   //... time passes
+   <span class="c1">//... time passes</span>
 
-   control = Control::PAUSE;
+   <span class="n">control</span> <span class="o">=</span> <span class="n">Control</span><span class="o">::</span><span class="n">PAUSE</span><span class="p">;</span>
 
-   std::cout &lt;&lt; static_cast&lt;int&gt;(control) &lt;&lt; std::endl;
-   // Correctly outputs: 3
+   <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">control</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+   <span class="c1">// Correctly outputs: 3</span>
 
-   return 0;
-}
-</code></pre>
+   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
 
 <p>A benefit to this is that it doesn't automatically convert to an integer (if you want the int, use <code>static_cast&lt;int&gt;</code>),
 which prevents problems like:</p>
-<pre><code class="C++">if(mode == SimMode::RUN || SimMode::PAUSE)
-{
-...
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="k">if</span><span class="p">(</span><span class="n">mode</span> <span class="o">==</span> <span class="n">SimMode</span><span class="o">::</span><span class="n">RUN</span> <span class="o">||</span> <span class="n">SimMode</span><span class="o">::</span><span class="n">PAUSE</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="p">...</span>
+</pre></div>
+
 
 <p>When using the namespaces, that check would always return true, because the value of <code>SimMode::PAUSE</code> is always <code>3</code>. 
 With the <code>enum class</code>, this will be compiler error because the <code>||</code> operator doesn't know what to do with the SimMode
 type. Then you can re-write it to do what you actually wanted:</p>
-<pre><code class="C++">if(mode == SimMode::RUN || mode == SimMode::PAUSE)
-{
-...
-</code></pre>
+<div class="codehilite"><pre><span></span><span class="k">if</span><span class="p">(</span><span class="n">mode</span> <span class="o">==</span> <span class="n">SimMode</span><span class="o">::</span><span class="n">RUN</span> <span class="o">||</span> <span class="n">mode</span> <span class="o">==</span> <span class="n">SimMode</span><span class="o">::</span><span class="n">PAUSE</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="p">...</span>
+</pre></div>
+
 
 <h2>Conclusion</h2>
 <p>Unless you need to add additional methods to your enum, use the new <code>enum class</code>. </p>

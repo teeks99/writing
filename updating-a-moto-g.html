@@ -98,48 +98,58 @@
 <p>Now I was all set to start.</p>
 <p>I connected the phone to my computer by a USB cable, then set it to USB debugging. Strangely by clicking on the Settings -&gt; About -&gt; Build number <strong>seven times</strong>, I guess they didn't want people to click it without having some idea of what they were doing.</p>
 <p>I was then able to <code>adb reboot bootloader</code>, which set the phone into a non-gui mode. From there I was able to run <code>sudo fastboot devices</code> to see my phone. I then tried to run <code>fastboot oem device-info</code> like was mentioned in the directions, but it didn't work. Even without that, I proceeded to contact <a href="http://motorola-global-portal.custhelp.com/app/standalone/bootloader/unlock-your-device-a">Motorola Support</a> to get the unlock code. They said that I instead needed to run <code>sudo fastboot oem get_unlock_data</code> instead. With that, I got five lines of hex data out, that I had to concatenate together and submit to get the code. With the unlock code in hand, I ran <code>sudo fastboot oem unlock CODE_HERE</code>. It responded with:</p>
-<pre><code>...
+<div class="codehilite"><pre><span></span>...
 (bootloader) Unlock code = CODE_HERE
 
 (bootloader) Partition not found
 (bootloader) Phone is unlocked successfully!
 OKAY [  0.918s]
 finished. total time: 0.918s
-</code></pre>
+</pre></div>
+
+
 <p>Which despite the "Partition not found" seemed good. </p>
 <p>I then rebooted and then back into the bootloader. Now I was ready to flash the recovery image.</p>
-<pre><code>$ sudo fastboot flash recovery twrp-3.2.1-0-titan.img 
-target reported max download size of 536870912 bytes
-sending 'recovery' (6 KB)...
-OKAY [  0.036s]
-writing 'recovery'...
-(bootloader) Invalid boot image
-FAILED (remote failure)
-finished. total time: 0.072s
-</code></pre>
+<div class="codehilite"><pre><span></span>$ sudo fastboot flash recovery twrp-3.2.1-0-titan.img 
+target reported max download size of <span class="m">536870912</span> bytes
+sending <span class="s1">&#39;recovery&#39;</span> <span class="o">(</span><span class="m">6</span> KB<span class="o">)</span>...
+OKAY <span class="o">[</span>  <span class="m">0</span>.036s<span class="o">]</span>
+writing <span class="s1">&#39;recovery&#39;</span>...
+<span class="o">(</span>bootloader<span class="o">)</span> Invalid boot image
+FAILED <span class="o">(</span>remote failure<span class="o">)</span>
+finished. total time: <span class="m">0</span>.072s
+</pre></div>
+
+
 <p>Aparently I had a corrupted download! Only 6KB. Luckily the flash command realized that this was corrupted...otherwise I would have had a nice slim brick. Let this be a lesson...always check the file hash! I got the correct file, verified with gpg, then uploaded.</p>
-<pre><code>$ sudo fastboot flash recovery twrp-3.2.1-0-titan.img 
-target reported max download size of 536870912 bytes
-sending 'recovery' (8162 KB)...
-OKAY [  0.281s]
-writing 'recovery'...
-OKAY [  0.354s]
-finished. total time: 0.635s
-</code></pre>
+<div class="codehilite"><pre><span></span>$ sudo fastboot flash recovery twrp-3.2.1-0-titan.img 
+target reported max download size of <span class="m">536870912</span> bytes
+sending <span class="s1">&#39;recovery&#39;</span> <span class="o">(</span><span class="m">8162</span> KB<span class="o">)</span>...
+OKAY <span class="o">[</span>  <span class="m">0</span>.281s<span class="o">]</span>
+writing <span class="s1">&#39;recovery&#39;</span>...
+OKAY <span class="o">[</span>  <span class="m">0</span>.354s<span class="o">]</span>
+finished. total time: <span class="m">0</span>.635s
+</pre></div>
+
+
 <p>This worked much better.</p>
 <p>Now I uploaded the images to the phone.</p>
-<pre><code>$ adb push lineage-14.1-20180617-nightly-titan-signed.zip /sdcard/
-4882 KB/s (333346542 bytes in 66.667s)
+<div class="codehilite"><pre><span></span>$ adb push lineage-14.1-20180617-nightly-titan-signed.zip /sdcard/
+<span class="m">4882</span> KB/s <span class="o">(</span><span class="m">333346542</span> bytes in <span class="m">66</span>.667s<span class="o">)</span>
 $ adb push open_gapps-arm-7.1-aroma-20180620.zip /sdcard/
-5932 KB/s (1201805700 bytes in 197.828s)
-</code></pre>
+<span class="m">5932</span> KB/s <span class="o">(</span><span class="m">1201805700</span> bytes in <span class="m">197</span>.828s<span class="o">)</span>
+</pre></div>
+
+
 <p>After this, I don't remember all the steps...there was a bit of stress, so I'm going to try to remember the GUI stuff as well as I can.</p>
 <p>The instructions recommended doing a backup, so I went through those steps in the GUI. I'm not sure what this is for, I don't have any data on this phone...do I need to backup the OS? </p>
 <p>Next I Selected the "Install" option, and browsed to the lineage-titan image. I installed it, and it went smoothly. </p>
 <p>Now the directions indicated that if I wanted the Google Apps, I should install them now. Somewhere in the documentation I read that Apps installed now go onto the system partition, which I thought would be a good idea since the phone doesn't have a ton of space...this could save space on the main partition. So I selected most of the options from the menu...at least all the stuff I use regurally. Skipped the foreign keyboards and some garbage like Google Newstand. Then I ran the install command. After a few seconds, it came back with a message saying that there wasn't enough space and the installer was exiting.</p>
 <p>Yikes, at first I was very stressed. I had already installed the main ROM and knew that as soon as I rebooted I'd be into it and wouldn't have another chance to install the GApps. After stopping and thinking about it for a second, I went back and tried installing that again. It seemed to not care that I had already tried (and failed) and was willing to try again. It even remembered my app selections. This time I went through and removed a lot of the more crufty stuff to trim it down....still not enough space. I tried a few more times, eventually getting down to a list where everything on it was stuff I'd definatly be using, and there still wasn't enough space. I even tried removing the backups that I'd previously made to see if it would help. It didn't seem to, I'm not sure if that is even on the same partition that the apps are installing to. I hope that backup isn't important. (In retrospect, I should have used adb pull to grab it off onto my PC) At this point, I noticed that it was outputting a log file, so I used adb to pull that off</p>
-<pre><code>adb adb pull /sdcard/open_gapps_log.txt
-</code></pre>
+<div class="codehilite"><pre><span></span>adb adb pull /sdcard/open_gapps_log.txt
+</pre></div>
+
+
 <p>This file was great. It listed all the apps I was trying to install, how much space each took and how much space was available for them. </p>
 <p>Also at this point, I realized that not installing any particular app wasn't going to be an issue, I could just get it through google play. So I got rid of a couple big ones: maps, docs, sheets and was under the size limit. Now the command worked! </p>
 <p>In retrospect, I would have gone with a much smaller install. Maybe just the play store and play services? Everything else is getting regular updates, and I assume these updates have to go on the normal partition, even if it was perviously on the system partition...so any space saving I get here will be temporary. </p>
