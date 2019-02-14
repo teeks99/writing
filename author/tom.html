@@ -84,22 +84,24 @@
 </footer><!-- /.post-info -->                                <h1>Using Enumerations in C++</h1>
 <h2>The problem</h2>
 <p>In olden times, C++ enums were the same as C enums. That is they had global scope for the names created:</p>
-<p>```C++</p>
-<h1>include <iostream></h1>
-<p>enum SIM_MODE
+<pre><code class="C++">#include &lt;iostream&gt;
+
+enum SIM_MODE
 {
    INITIALIZE = 1,
    RUN = 2,
    RESET = 3,
    PAUSE = 4
-};</p>
-<p>enum CONTROL
+};
+
+enum CONTROL
 {
    START = 1,
    STOP = 2,
    PAUSE = 3
-};</p>
-<p>int main(int …</p>
+};
+
+int main(int …</code></pre>
                                 <p class="readmore">
                                     <a class="btn btn-small btn-info" href="https://teeks99.github.io/writing/c-enums.html">Read more...</a>
                                 </p>

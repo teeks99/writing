@@ -82,31 +82,38 @@
         <h1>Using Enumerations in C++</h1>
 <h2>The problem</h2>
 <p>In olden times, C++ enums were the same as C enums. That is they had global scope for the names created:</p>
-<p>```C++</p>
-<h1>include <iostream></h1>
-<p>enum SIM_MODE
+<pre><code class="C++">#include &lt;iostream&gt;
+
+enum SIM_MODE
 {
    INITIALIZE = 1,
    RUN = 2,
    RESET = 3,
    PAUSE = 4
-};</p>
-<p>enum CONTROL
+};
+
+enum CONTROL
 {
    START = 1,
    STOP = 2,
    PAUSE = 3
-};</p>
-<p>int main(int argc, char* argv[])
+};
+
+int main(int argc, char* argv[])
 {
    SIM_MODE mode = INITIALIZE;
-   CONTROL control = START;</p>
-<p>//... time passes</p>
-<p>control = PAUSE;</p>
-<p>std::cout &lt;&lt; control &lt;&lt; std::endl;</p>
-<p>return 0;
+   CONTROL control = START;
+
+   //... time passes
+
+   control = PAUSE;
+
+   std::cout &lt;&lt; control &lt;&lt; std::endl;
+
+   return 0;
 }
-```</p>
+</code></pre>
+
 <p>Gives an error:
 <code>main.cpp(16): error C2365: 'PAUSE': redefinition; previous definition was 'enumerator'</code></p>
 <p>This is because all the names decleared in the enum are global.</p>
@@ -114,8 +121,7 @@
 get out of hand quite quickly. Yuck!</p>
 <h2>C++ Enums</h2>
 <p>In C++ (98/03) we solved this by adding namespaces around the enums (). This solves the problem, but has some redundancy:</p>
-<p>```C++
-namespace SimMode
+<pre><code class="C++">namespace SimMode
 {
    enum SIM_MODE
    {
@@ -124,8 +130,9 @@ namespace SimMode
       RESET = 3,
       PAUSE = 4
    };
-};</p>
-<p>namespace Control
+};
+
+namespace Control
 {
    enum CONTROL
    {
@@ -133,60 +140,74 @@ namespace SimMode
       STOP = 2,
       PAUSE = 3
    };
-};</p>
-<p>int main(int argc, char* argv[])
+};
+
+int main(int argc, char* argv[])
 {
    SimMode::SIM_MODE mode = SimMode::INITIALIZE;
-   Control::CONTROL control = Control::START;</p>
-<p>//... time passes</p>
-<p>control = Control::PAUSE;</p>
-<p>std::cout &lt;&lt; control &lt;&lt; std::endl;
-   // Correctly outputs: 3</p>
-<p>return 0;
+   Control::CONTROL control = Control::START;
+
+   //... time passes
+
+   control = Control::PAUSE;
+
+   std::cout &lt;&lt; control &lt;&lt; std::endl;
+   // Correctly outputs: 3
+
+   return 0;
 }
-```</p>
+</code></pre>
+
 <p>This could also have been put in a class/struct instead of a namespace. Useful if you want to add methods, like 
 <code>string GetModeName()</code>. </p>
 <h2>Modern C++</h2>
 <p>Finally, with C++11 the feature was baked into the language with the <code>enum class</code>. </p>
-<p>```C++
-enum class SimMode
+<pre><code class="C++">enum class SimMode
 {
    INITIALIZE = 1,
    RUN = 2,
    RESET = 3,
    PAUSE = 4
-};</p>
-<p>enum class Control
+};
+
+enum class Control
 {
    START = 1,
    STOP = 2,
    PAUSE = 3
-};</p>
-<p>int main(int argc, char* argv[])
+};
+
+int main(int argc, char* argv[])
 {
    SimMode mode = SimMode::INITIALIZE;
-   Control control = Control::START;</p>
-<p>//... time passes</p>
-<p>control = Control::PAUSE;</p>
-<p>std::cout &lt;&lt; static_cast<int>(control) &lt;&lt; std::endl;
-   // Correctly outputs: 3</p>
-<p>return 0;
+   Control control = Control::START;
+
+   //... time passes
+
+   control = Control::PAUSE;
+
+   std::cout &lt;&lt; static_cast&lt;int&gt;(control) &lt;&lt; std::endl;
+   // Correctly outputs: 3
+
+   return 0;
 }
-```</p>
+</code></pre>
+
 <p>A benefit to this is that it doesn't automatically convert to an integer (if you want the int, use <code>static_cast&lt;int&gt;</code>),
 which prevents problems like:</p>
-<p><code>C++
-if(mode == SimMode::RUN || SimMode::PAUSE)
+<pre><code class="C++">if(mode == SimMode::RUN || SimMode::PAUSE)
 {
-...</code></p>
+...
+</code></pre>
+
 <p>When using the namespaces, that check would always return true, because the value of <code>SimMode::PAUSE</code> is always <code>3</code>. 
 With the <code>enum class</code>, this will be compiler error because the <code>||</code> operator doesn't know what to do with the SimMode
 type. Then you can re-write it to do what you actually wanted:</p>
-<p><code>C++
-if(mode == SimMode::RUN || mode == SimMode::PAUSE)
+<pre><code class="C++">if(mode == SimMode::RUN || mode == SimMode::PAUSE)
 {
-...</code></p>
+...
+</code></pre>
+
 <h2>Conclusion</h2>
 <p>Unless you need to add additional methods to your enum, use the new <code>enum class</code>. </p>
 
