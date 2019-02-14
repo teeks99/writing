@@ -46,5 +46,6 @@ MARKDOWN = {
     'extension_configs': {
         'markdown.extensions.tables':{},
         'markdown.extensions.fenced_code':{},
+        'markdown.extensions.codehilite':{},
     }
 }
