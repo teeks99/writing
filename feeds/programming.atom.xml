@@ -1,5 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Tom's Writing - programming</title><link href="https://teeks99.github.io/writing/" rel="alternate"></link><link href="https://teeks99.github.io/writing/feeds/programming.atom.xml" rel="self"></link><id>https://teeks99.github.io/writing/</id><updated>2019-01-23T22:00:00-06:00</updated><entry><title>"Building with a Ramdisk"</title><link href="https://teeks99.github.io/writing/building-with-a-ramdisk.html" rel="alternate"></link><published>2019-01-23T22:00:00-06:00</published><updated>2019-01-23T22:00:00-06:00</updated><author><name>Tom</name></author><id>tag:teeks99.github.io,2019-01-23:/writing/building-with-a-ramdisk.html</id><summary type="html">&lt;h1&gt;Building with a Ramdisk&lt;/h1&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Tom's Writing - programming</title><link href="https://teeks99.github.io/writing/" rel="alternate"></link><link href="https://teeks99.github.io/writing/feeds/programming.atom.xml" rel="self"></link><id>https://teeks99.github.io/writing/</id><updated>2019-02-13T22:00:00-06:00</updated><entry><title>"C++ Enums"</title><link href="https://teeks99.github.io/writing/c-enums.html" rel="alternate"></link><published>2019-02-13T22:00:00-06:00</published><updated>2019-02-13T22:00:00-06:00</updated><author><name>Tom</name></author><id>tag:teeks99.github.io,2019-02-13:/writing/c-enums.html</id><summary type="html">&lt;h1&gt;Using Enumerations in C++&lt;/h1&gt;
+&lt;h2&gt;The problem&lt;/h2&gt;
+&lt;p&gt;In olden times, C++ enums were the same as C enums. That is they had global scope for the names created:&lt;/p&gt;
+&lt;p&gt;```C++&lt;/p&gt;
+&lt;h1&gt;include &lt;iostream&gt;&lt;/h1&gt;
+&lt;p&gt;enum SIM_MODE
+{
+   INITIALIZE = 1,
+   RUN = 2,
+   RESET = 3,
+   PAUSE = 4
+};&lt;/p&gt;
+&lt;p&gt;enum CONTROL
+{
+   START = 1,
+   STOP = 2,
+   PAUSE = 3
+};&lt;/p&gt;
+&lt;p&gt;int main(int …&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Using Enumerations in C++&lt;/h1&gt;
+&lt;h2&gt;The problem&lt;/h2&gt;
+&lt;p&gt;In olden times, C++ enums were the same as C enums. That is they had global scope for the names created:&lt;/p&gt;
+&lt;p&gt;```C++&lt;/p&gt;
+&lt;h1&gt;include &lt;iostream&gt;&lt;/h1&gt;
+&lt;p&gt;enum SIM_MODE
+{
+   INITIALIZE = 1,
+   RUN = 2,
+   RESET = 3,
+   PAUSE = 4
+};&lt;/p&gt;
+&lt;p&gt;enum CONTROL
+{
+   START = 1,
+   STOP = 2,
+   PAUSE = 3
+};&lt;/p&gt;
+&lt;p&gt;int main(int argc, char* argv[])
+{
+   SIM_MODE mode = INITIALIZE;
+   CONTROL control = START;&lt;/p&gt;
+&lt;p&gt;//... time passes&lt;/p&gt;
+&lt;p&gt;control = PAUSE;&lt;/p&gt;
+&lt;p&gt;std::cout &amp;lt;&amp;lt; control &amp;lt;&amp;lt; std::endl;&lt;/p&gt;
+&lt;p&gt;return 0;
+}
+```&lt;/p&gt;
+&lt;p&gt;Gives an error:
+&lt;code&gt;main.cpp(16): error C2365: 'PAUSE': redefinition; previous definition was 'enumerator'&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;This is because all the names decleared in the enum are global.&lt;/p&gt;
+&lt;p&gt;C code solves this problem by making the names more specific, e.g. CONTROL_START, CONTROL_STOP, CONTROL_PAUSE. This can
+get out of hand quite quickly. Yuck!&lt;/p&gt;
+&lt;h2&gt;C++ Enums&lt;/h2&gt;
+&lt;p&gt;In C++ (98/03) we solved this by adding namespaces around the enums (). This solves the problem, but has some redundancy:&lt;/p&gt;
+&lt;p&gt;```C++
+namespace SimMode
+{
+   enum SIM_MODE
+   {
+      INITIALIZE = 1,
+      RUN = 2,
+      RESET = 3,
+      PAUSE = 4
+   };
+};&lt;/p&gt;
+&lt;p&gt;namespace Control
+{
+   enum CONTROL
+   {
+      START = 1,
+      STOP = 2,
+      PAUSE = 3
+   };
+};&lt;/p&gt;
+&lt;p&gt;int main(int argc, char* argv[])
+{
+   SimMode::SIM_MODE mode = SimMode::INITIALIZE;
+   Control::CONTROL control = Control::START;&lt;/p&gt;
+&lt;p&gt;//... time passes&lt;/p&gt;
+&lt;p&gt;control = Control::PAUSE;&lt;/p&gt;
+&lt;p&gt;std::cout &amp;lt;&amp;lt; control &amp;lt;&amp;lt; std::endl;
+   // Correctly outputs: 3&lt;/p&gt;
+&lt;p&gt;return 0;
+}
+```&lt;/p&gt;
+&lt;p&gt;This could also have been put in a class/struct instead of a namespace. Useful if you want to add methods, like 
+&lt;code&gt;string GetModeName()&lt;/code&gt;. &lt;/p&gt;
+&lt;h2&gt;Modern C++&lt;/h2&gt;
+&lt;p&gt;Finally, with C++11 the feature was baked into the language with the &lt;code&gt;enum class&lt;/code&gt;. &lt;/p&gt;
+&lt;p&gt;```C++
+enum class SimMode
+{
+   INITIALIZE = 1,
+   RUN = 2,
+   RESET = 3,
+   PAUSE = 4
+};&lt;/p&gt;
+&lt;p&gt;enum class Control
+{
+   START = 1,
+   STOP = 2,
+   PAUSE = 3
+};&lt;/p&gt;
+&lt;p&gt;int main(int argc, char* argv[])
+{
+   SimMode mode = SimMode::INITIALIZE;
+   Control control = Control::START;&lt;/p&gt;
+&lt;p&gt;//... time passes&lt;/p&gt;
+&lt;p&gt;control = Control::PAUSE;&lt;/p&gt;
+&lt;p&gt;std::cout &amp;lt;&amp;lt; static_cast&lt;int&gt;(control) &amp;lt;&amp;lt; std::endl;
+   // Correctly outputs: 3&lt;/p&gt;
+&lt;p&gt;return 0;
+}
+```&lt;/p&gt;
+&lt;p&gt;A benefit to this is that it doesn't automatically convert to an integer (if you want the int, use &lt;code&gt;static_cast&amp;lt;int&amp;gt;&lt;/code&gt;),
+which prevents problems like:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;C++
+if(mode == SimMode::RUN || SimMode::PAUSE)
+{
+...&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;When using the namespaces, that check would always return true, because the value of &lt;code&gt;SimMode::PAUSE&lt;/code&gt; is always &lt;code&gt;3&lt;/code&gt;. 
+With the &lt;code&gt;enum class&lt;/code&gt;, this will be compiler error because the &lt;code&gt;||&lt;/code&gt; operator doesn't know what to do with the SimMode
+type. Then you can re-write it to do what you actually wanted:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;C++
+if(mode == SimMode::RUN || mode == SimMode::PAUSE)
+{
+...&lt;/code&gt;&lt;/p&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;Unless you need to add additional methods to your enum, use the new &lt;code&gt;enum class&lt;/code&gt;. &lt;/p&gt;</content></entry><entry><title>"Building with a Ramdisk"</title><link href="https://teeks99.github.io/writing/building-with-a-ramdisk.html" rel="alternate"></link><published>2019-01-23T22:00:00-06:00</published><updated>2019-01-23T22:00:00-06:00</updated><author><name>Tom</name></author><id>tag:teeks99.github.io,2019-01-23:/writing/building-with-a-ramdisk.html</id><summary type="html">&lt;h1&gt;Building with a Ramdisk&lt;/h1&gt;
 &lt;p&gt;TL;DR: Ramdisks don't help build times.&lt;/p&gt;
 &lt;p&gt;I've long been thinking that C++ build times were often disk IO limited. The
 biggest thing that lead me to think that was the speedup in build times when I 
