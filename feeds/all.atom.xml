@@ -1,5 +1,401 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Tom's Writing</title><link href="https://teeks99.github.io/writing/" rel="alternate"></link><link href="https://teeks99.github.io/writing/feeds/all.atom.xml" rel="self"></link><id>https://teeks99.github.io/writing/</id><updated>2019-02-13T22:00:00-06:00</updated><entry><title>"C++ Enums"</title><link href="https://teeks99.github.io/writing/c-enums.html" rel="alternate"></link><published>2019-02-13T22:00:00-06:00</published><updated>2019-02-13T22:00:00-06:00</updated><author><name>Tom</name></author><id>tag:teeks99.github.io,2019-02-13:/writing/c-enums.html</id><summary type="html">&lt;h1&gt;Using Enumerations in C++&lt;/h1&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Tom's Writing</title><link href="https://teeks99.github.io/writing/" rel="alternate"></link><link href="https://teeks99.github.io/writing/feeds/all.atom.xml" rel="self"></link><id>https://teeks99.github.io/writing/</id><updated>2019-02-24T10:00:00-06:00</updated><entry><title>"Baked Rigatoni"</title><link href="https://teeks99.github.io/writing/baked-rigatoni.html" rel="alternate"></link><published>2019-02-24T10:00:00-06:00</published><updated>2019-02-24T10:00:00-06:00</updated><author><name>Tom</name></author><id>tag:teeks99.github.io,2019-02-24:/writing/baked-rigatoni.html</id><summary type="html">&lt;h1&gt;Baked Rigatoni&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;1lb Uncooked Rigatoni Noodles&lt;/li&gt;
+&lt;li&gt;24oz Prego With Mushrooms sauce (1 jar)&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;1lb Shreadded Mozzarella Cheese (1x 4cup bag)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Boil Rigatoni Noodles, drain&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;Mix cooked noodles with sauce&lt;/li&gt;
+&lt;li&gt;Put into 9x13 glass baking pan&lt;/li&gt;
+&lt;li&gt;Cover with Mozzarella Cheese&lt;/li&gt;
+&lt;li&gt;Bake 20 minutes at 350F&lt;/li&gt;
+&lt;/ul&gt;</summary><content type="html">&lt;h1&gt;Baked Rigatoni&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;1lb Uncooked Rigatoni Noodles&lt;/li&gt;
+&lt;li&gt;24oz Prego With Mushrooms sauce (1 jar)&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;1lb Shreadded Mozzarella Cheese (1x 4cup bag)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Boil Rigatoni Noodles, drain&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;Mix cooked noodles with sauce&lt;/li&gt;
+&lt;li&gt;Put into 9x13 glass baking pan&lt;/li&gt;
+&lt;li&gt;Cover with Mozzarella Cheese&lt;/li&gt;
+&lt;li&gt;Bake 20 minutes at 350F&lt;/li&gt;
+&lt;/ul&gt;</content></entry><entry><title>"Dirt Cake"</title><link href="https://teeks99.github.io/writing/dirt-cake.html" rel="alternate"></link><published>2019-02-24T10:00:00-06:00</published><updated>2019-02-24T10:00:00-06:00</updated><author><name>Tom</name></author><id>tag:teeks99.github.io,2019-02-24:/writing/dirt-cake.html</id><summary type="html">&lt;h1&gt;Dirt Cake&lt;/h1&gt;
+&lt;h2&gt;Ingredients&lt;/h2&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;* 1/2 cup butter, softened
+* 1 (8 ounce) package cream cheese, softened
+* 1/2 cup confectioners&amp;#39; sugar
+* 2 (3.5 ounce) packages instant vanilla pudding mix
+* 3 1/2 cups milk
+* 1 (12 ounce) container frozen whipped topping, thawed
+* 32 ounces chocolate sandwich cookies with creme filling …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;h1&gt;Dirt Cake&lt;/h1&gt;
+&lt;h2&gt;Ingredients&lt;/h2&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;* 1/2 cup butter, softened
+* 1 (8 ounce) package cream cheese, softened
+* 1/2 cup confectioners&amp;#39; sugar
+* 2 (3.5 ounce) packages instant vanilla pudding mix
+* 3 1/2 cups milk
+* 1 (12 ounce) container frozen whipped topping, thawed
+* 32 ounces chocolate sandwich cookies with creme filling
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Directions&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Chop cookies very fine in food processor. The white cream will disappear.&lt;/li&gt;
+&lt;li&gt;Mix butter, cream cheese, and sugar in bowl.&lt;/li&gt;
+&lt;li&gt;In a large bowl mix milk, pudding and whipped topping together.&lt;/li&gt;
+&lt;li&gt;Combine pudding mixture and cream mixture together.&lt;/li&gt;
+&lt;li&gt;Layer in flower pot, starting with cookies then cream mixture. Repeat layers.&lt;/li&gt;
+&lt;li&gt;Chill until ready to serve.&lt;/li&gt;
+&lt;li&gt;Add artificial flower and trowel. Enjoy!&lt;/li&gt;
+&lt;/ol&gt;</content></entry><entry><title>"German Pancakes"</title><link href="https://teeks99.github.io/writing/german-pancakes.html" rel="alternate"></link><published>2019-02-24T10:00:00-06:00</published><updated>2019-02-24T10:00:00-06:00</updated><author><name>Tom</name></author><id>tag:teeks99.github.io,2019-02-24:/writing/german-pancakes.html</id><summary type="html">&lt;h1&gt;German Pancakes Recipe - Dutch Baby Pancakes Recipe&lt;/h1&gt;
+&lt;h2&gt;Ingredients&lt;/h2&gt;
+&lt;p&gt;Makes 4 to 6 servings
+&lt;em&gt; 6 eggs, room temperature
+&lt;/em&gt; 1 cup milk, room temperature
+&lt;em&gt; 1 cup sifted bread flour or all-purpose flour
+&lt;/em&gt; 1/4 teaspoon pure vanilla extract
+&lt;em&gt; 1/4 teaspoon ground cinnamon
+&lt;/em&gt; 5 tablespoons butter
+&lt;em&gt; Freshly-squeezed lemon juice
+&lt;/em&gt; Powdered (confectioners') sugar …&lt;/p&gt;</summary><content type="html">&lt;h1&gt;German Pancakes Recipe - Dutch Baby Pancakes Recipe&lt;/h1&gt;
+&lt;h2&gt;Ingredients&lt;/h2&gt;
+&lt;p&gt;Makes 4 to 6 servings
+&lt;em&gt; 6 eggs, room temperature
+&lt;/em&gt; 1 cup milk, room temperature
+&lt;em&gt; 1 cup sifted bread flour or all-purpose flour
+&lt;/em&gt; 1/4 teaspoon pure vanilla extract
+&lt;em&gt; 1/4 teaspoon ground cinnamon
+&lt;/em&gt; 5 tablespoons butter
+&lt;em&gt; Freshly-squeezed lemon juice
+&lt;/em&gt; Powdered (confectioners') sugar&lt;/p&gt;
+&lt;p&gt;Makes 2 to 4 servings
+&lt;em&gt; 3 eggs, room temperature
+&lt;/em&gt; 1/2 cup milk, room temperature
+&lt;em&gt; 1/2 cup sifted bread flour or all-purpose flour
+&lt;/em&gt; 1/8 teaspoon pure vanilla extract
+&lt;em&gt; 1/8 teaspoon ground cinnamon&amp;lt;
+&lt;/em&gt; 7 teaspoons butter
+&lt;em&gt; Freshly-squeezed lemon juice
+&lt;/em&gt; Powdered (confectioner's) sugar&lt;/p&gt;
+&lt;h2&gt;Instructions&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Preheat oven to 450 degrees F. NOTE: It is very important that you preheat your oven. Place oven rack on the middle rack of your oven. Place a large, heavy ovenproof frying pan or a cast iron skillet (I like to use my 10-inch cast-iron skillet), in the oven until hot and sizzling. While pan is heating, prepare your batter.&lt;/p&gt;
+&lt;p&gt;NOTE: Use a shallow pan, not more than 3 inches deep (pie pans, cast iron skillets, oven-proof fry pans, baking dishes, paella pans). Like I said before, I prefer using a cast iron skillet or pan because it acts as a heat reservoir, retaining the heat and distributing it evenly.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;In a large bowl, beat the eggs until light and frothy; add milk, flour, vanilla extract, and cinnamon; beat for 5 minutes more. The batter will be thin, but very smooth and creamy.&lt;/p&gt;
+&lt;p&gt;Using a pot holder, remove the hot skillet from the oven; add the butter; tilting the pan to melt the butter and coat the skillet.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Pour the prepared batter into the hot skillet, all at once, and immediately return the skillet to the oven.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Bake approximately 20 to 25 minutes or until puffed and golden brown (bake until the pancake puffs up around the edges - it may puff irregularly in the center).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Remove from oven and serve immediately. Either bring the pancake to the table in its pan or slide it onto a serving plate. Once out of the oven, the pancake will begin to deflate.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;To serve, cut into serving-size wedges and transfer to individual serving plates. Top with your favorite topping and serve immediately. For a classic German Pancake/Dutch Baby, sprinkle with freshly squeezed lemon juice, and dust the top with powdered sugar.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;From: &lt;a href="http://whatscookingamerica.net/Eggs/GermanPancake.htm"&gt;http://whatscookingamerica.net/Eggs/GermanPancake.htm&lt;/a&gt;&lt;/p&gt;</content></entry><entry><title>"Kent Pumpkin Pie"</title><link href="https://teeks99.github.io/writing/kent-pumpkin-pie.html" rel="alternate"></link><published>2019-02-24T10:00:00-06:00</published><updated>2019-02-24T10:00:00-06:00</updated><author><name>Tom</name></author><id>tag:teeks99.github.io,2019-02-24:/writing/kent-pumpkin-pie.html</id><summary type="html">&lt;h1&gt;Kent Pumpkin Pie&lt;/h1&gt;
+&lt;p&gt;Makes 2  9" pies.
+As passed down by Rita Kent. &lt;/p&gt;
+&lt;h2&gt;Crust&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;1 1/2 cups flour&lt;/li&gt;
+&lt;li&gt;1 1/2 sticks of margarine or butter (Rita says not butter, experiements have worked with butter)&lt;/li&gt;
+&lt;li&gt;6 Tbs. cold water&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;pinch of salt&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Put flour and salt together in a …&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;h1&gt;Kent Pumpkin Pie&lt;/h1&gt;
+&lt;p&gt;Makes 2  9" pies.
+As passed down by Rita Kent. &lt;/p&gt;
+&lt;h2&gt;Crust&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;1 1/2 cups flour&lt;/li&gt;
+&lt;li&gt;1 1/2 sticks of margarine or butter (Rita says not butter, experiements have worked with butter)&lt;/li&gt;
+&lt;li&gt;6 Tbs. cold water&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;pinch of salt&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Put flour and salt together in a bowl, add margarine&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;Cut into very small pieces with a pastry blender, making sure all the flour is blended in. &lt;/li&gt;
+&lt;li&gt;Add cold water and stir. If dough is very wet add a little more flour but don't make it dry. &lt;/li&gt;
+&lt;li&gt;Pat into 2 hamburger like shapes and refrigerate for at least 2 hours. &lt;/li&gt;
+&lt;li&gt;Roll out on a floured board and shape to fit pie plate. &lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Pie&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;6 eggs&lt;/li&gt;
+&lt;li&gt;1 can 29 oz. canned pumpkin&lt;/li&gt;
+&lt;li&gt;1 3/4 cups sugar&lt;/li&gt;
+&lt;li&gt;3 1/2 Tbsp. cinnamon&lt;/li&gt;
+&lt;li&gt;1 1/2 tsp. salt&lt;/li&gt;
+&lt;li&gt;1 tsp. nutmeg&lt;/li&gt;
+&lt;li&gt;1/2 tsp. ground cloves&lt;/li&gt;
+&lt;li&gt;1 12oz. can evaporated milk&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;2 cups whole milk&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Beat eggs until blended together. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;Add pumpkin, sugar, cinnamon, salt, nutmeg, cloves and mix until well blended. &lt;/li&gt;
+&lt;li&gt;Slowly add evaporated and whole milk. &lt;/li&gt;
+&lt;li&gt;Pour into prepared crusts.&lt;/li&gt;
+&lt;li&gt;Bake in a 450 degree preheated oven for 10 minutes. &lt;/li&gt;
+&lt;li&gt;Reduce heat to 325 degrees and continue baking for 55 minutes or until an inserted knife comes out clean.&lt;/li&gt;
+&lt;/ul&gt;</content></entry><entry><title>"Kent Spaghetti"</title><link href="https://teeks99.github.io/writing/kent-spaghetti.html" rel="alternate"></link><published>2019-02-24T10:00:00-06:00</published><updated>2019-02-24T10:00:00-06:00</updated><author><name>Tom</name></author><id>tag:teeks99.github.io,2019-02-24:/writing/kent-spaghetti.html</id><summary type="html">&lt;h1&gt;Kent Spaghetti&lt;/h1&gt;
+&lt;p&gt;Feel free to use this recipe and give it to all your friends and relatives, 
+but whenever you pass it on, just let them know that this is KENT 
+spaghetti...and have them pass that perl of wisdom on to whoever they may serve 
+this to :-)&lt;/p&gt;
+&lt;h2&gt;Ingredients&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;1 …&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;h1&gt;Kent Spaghetti&lt;/h1&gt;
+&lt;p&gt;Feel free to use this recipe and give it to all your friends and relatives, 
+but whenever you pass it on, just let them know that this is KENT 
+spaghetti...and have them pass that perl of wisdom on to whoever they may serve 
+this to :-)&lt;/p&gt;
+&lt;h2&gt;Ingredients&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;1 Green Pepper&lt;/li&gt;
+&lt;li&gt;3 Medium Onions&lt;/li&gt;
+&lt;li&gt;1 Tbsp Oil&lt;/li&gt;
+&lt;li&gt;3-4 Celery Stalks (optional)&lt;/li&gt;
+&lt;li&gt;1lb Ground Beef&lt;/li&gt;
+&lt;li&gt;45oz Tomato Sauce (3x15oz)&lt;/li&gt;
+&lt;li&gt;8oz can Cream of Mushroom Soup&lt;/li&gt;
+&lt;li&gt;1/2 package of Velveeta&lt;/li&gt;
+&lt;li&gt;3 Tbsp Sugar&lt;/li&gt;
+&lt;li&gt;2lb Spaghetti&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Directions&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Dice Green Pepper, Onions, and Celery&lt;/li&gt;
+&lt;li&gt;In a large saucepan, sautee with oil until browned&lt;/li&gt;
+&lt;li&gt;Add ground beef, brown it&lt;/li&gt;
+&lt;li&gt;Add sauce, soup, cheese, sugar. &lt;/li&gt;
+&lt;li&gt;Cook 15-30 min.&lt;/li&gt;
+&lt;li&gt;Cook spaghetti, drain.&lt;/li&gt;
+&lt;li&gt;Combine sauce and spaghetti, simmer 5-10min 
+   (be especially careful to not burn bottom)&lt;/li&gt;
+&lt;/ol&gt;</content></entry><entry><title>"Quaker Oatmeal Raisin Cookies"</title><link href="https://teeks99.github.io/writing/quaker-oatmeal-raisin-cookies.html" rel="alternate"></link><published>2019-02-24T10:00:00-06:00</published><updated>2019-02-24T10:00:00-06:00</updated><author><name>Tom</name></author><id>tag:teeks99.github.io,2019-02-24:/writing/quaker-oatmeal-raisin-cookies.html</id><summary type="html">&lt;h1&gt;Quaker "Vanishing Oatmeal Raisin Cookies"&lt;/h1&gt;
+&lt;p&gt;Makes about four dozen&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;1C. (2 sticks) margin or butter, softened&lt;/li&gt;
+&lt;li&gt;1C. Firmly Packed Brown Sugar&lt;/li&gt;
+&lt;li&gt;1/2 C. Granulated Sugar&lt;/li&gt;
+&lt;li&gt;2 Eggs&lt;/li&gt;
+&lt;li&gt;1 Teaspoon Vanilla&lt;/li&gt;
+&lt;li&gt;1 and 1/2 C. Flour&lt;/li&gt;
+&lt;li&gt;1 Teaspoon Baking Soda&lt;/li&gt;
+&lt;li&gt;1 Teaspoon Cinnamon&lt;/li&gt;
+&lt;li&gt;1/2 Teaspoon Salt&lt;/li&gt;
+&lt;li&gt;3 C …&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;h1&gt;Quaker "Vanishing Oatmeal Raisin Cookies"&lt;/h1&gt;
+&lt;p&gt;Makes about four dozen&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;1C. (2 sticks) margin or butter, softened&lt;/li&gt;
+&lt;li&gt;1C. Firmly Packed Brown Sugar&lt;/li&gt;
+&lt;li&gt;1/2 C. Granulated Sugar&lt;/li&gt;
+&lt;li&gt;2 Eggs&lt;/li&gt;
+&lt;li&gt;1 Teaspoon Vanilla&lt;/li&gt;
+&lt;li&gt;1 and 1/2 C. Flour&lt;/li&gt;
+&lt;li&gt;1 Teaspoon Baking Soda&lt;/li&gt;
+&lt;li&gt;1 Teaspoon Cinnamon&lt;/li&gt;
+&lt;li&gt;1/2 Teaspoon Salt&lt;/li&gt;
+&lt;li&gt;3 C. Quaker Oats - Uncooked (Minute oats or Old-Fashioned...generic fine)&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;1 C. Raisins&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Heat oven to 350&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;Beat together butter and sugars until creamy&lt;/li&gt;
+&lt;li&gt;Add eggs and vanilla, beat well&lt;/li&gt;
+&lt;li&gt;Add combined flour, baking soda, cinnamon, and salt; mix well&lt;/li&gt;
+&lt;li&gt;Stir in oats and raisins, mix well&lt;/li&gt;
+&lt;li&gt;Drop by rounded tablespoonfuls onto ungreased cookie sheet&lt;/li&gt;
+&lt;li&gt;Bake 10 to 12 minutes or until golden brown&lt;/li&gt;
+&lt;li&gt;Cool 1 minute on cookies sheet, remove to wire rack&lt;/li&gt;
+&lt;/ul&gt;</content></entry><entry><title>"Ricotta Chocolate Cake"</title><link href="https://teeks99.github.io/writing/ricotta-chocolate-cake.html" rel="alternate"></link><published>2019-02-24T10:00:00-06:00</published><updated>2019-02-24T10:00:00-06:00</updated><author><name>Tom</name></author><id>tag:teeks99.github.io,2019-02-24:/writing/ricotta-chocolate-cake.html</id><summary type="html">&lt;p&gt;Ricotta Chocolate Cake with Frosting
+From Laura Kent&lt;/p&gt;
+&lt;h1&gt;Cake&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;3c. flour&lt;/li&gt;
+&lt;li&gt;1 1/4c cocoa&lt;/li&gt;
+&lt;li&gt;2 1/2tsp baking soda&lt;/li&gt;
+&lt;li&gt;1 1/2tsp baking powder&lt;/li&gt;
+&lt;li&gt;1/2tsp salt&lt;/li&gt;
+&lt;li&gt;2c sugar&lt;/li&gt;
+&lt;li&gt;1 1/4c veg oil&lt;/li&gt;
+&lt;li&gt;2tsp vanilla&lt;/li&gt;
+&lt;li&gt;1c ricotta&lt;/li&gt;
+&lt;li&gt;3 eggs&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;2 1/2c water&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Preheat oven to 350F.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;Grease …&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;p&gt;Ricotta Chocolate Cake with Frosting
+From Laura Kent&lt;/p&gt;
+&lt;h1&gt;Cake&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;3c. flour&lt;/li&gt;
+&lt;li&gt;1 1/4c cocoa&lt;/li&gt;
+&lt;li&gt;2 1/2tsp baking soda&lt;/li&gt;
+&lt;li&gt;1 1/2tsp baking powder&lt;/li&gt;
+&lt;li&gt;1/2tsp salt&lt;/li&gt;
+&lt;li&gt;2c sugar&lt;/li&gt;
+&lt;li&gt;1 1/4c veg oil&lt;/li&gt;
+&lt;li&gt;2tsp vanilla&lt;/li&gt;
+&lt;li&gt;1c ricotta&lt;/li&gt;
+&lt;li&gt;3 eggs&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;2 1/2c water&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Preheat oven to 350F.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;Grease pans.&lt;/li&gt;
+&lt;li&gt;Mix dry ingredients.&lt;/li&gt;
+&lt;li&gt;Mix sugar, oil, ricotta, vanilla.&lt;/li&gt;
+&lt;li&gt;Add eggs.&lt;/li&gt;
+&lt;li&gt;Beat in flour mix and water.&lt;/li&gt;
+&lt;li&gt;Bake 35-40 min.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;Frosting&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;1c sour cream&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;12oz milk chocolate&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Melt chocolate until smooth.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;Let cool to room temp then add sour cream.&lt;/li&gt;
+&lt;/ul&gt;</content></entry><entry><title>"Tuna and Noodles"</title><link href="https://teeks99.github.io/writing/tuna-and-noodles.html" rel="alternate"></link><published>2019-02-24T10:00:00-06:00</published><updated>2019-02-24T10:00:00-06:00</updated><author><name>Tom</name></author><id>tag:teeks99.github.io,2019-02-24:/writing/tuna-and-noodles.html</id><summary type="html">&lt;h1&gt;Tuna and Noodles&lt;/h1&gt;
+&lt;h2&gt;Ingredients&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;1 Can tuna&lt;/li&gt;
+&lt;li&gt;1 Tbsp butter&lt;/li&gt;
+&lt;li&gt;1 Tbsp flour&lt;/li&gt;
+&lt;li&gt;1 Cup milk&lt;/li&gt;
+&lt;li&gt;Black Pepper (or white pepper)&lt;/li&gt;
+&lt;li&gt;Egg Noodles&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Directions&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Cook egg noodles.&lt;/li&gt;
+&lt;li&gt;Combine butter and flour and cook until melted and combined into a roux.&lt;/li&gt;
+&lt;li&gt;Add milk a little at a time while stirring continueously …&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;h1&gt;Tuna and Noodles&lt;/h1&gt;
+&lt;h2&gt;Ingredients&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;1 Can tuna&lt;/li&gt;
+&lt;li&gt;1 Tbsp butter&lt;/li&gt;
+&lt;li&gt;1 Tbsp flour&lt;/li&gt;
+&lt;li&gt;1 Cup milk&lt;/li&gt;
+&lt;li&gt;Black Pepper (or white pepper)&lt;/li&gt;
+&lt;li&gt;Egg Noodles&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Directions&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Cook egg noodles.&lt;/li&gt;
+&lt;li&gt;Combine butter and flour and cook until melted and combined into a roux.&lt;/li&gt;
+&lt;li&gt;Add milk a little at a time while stirring continueously.&lt;/li&gt;
+&lt;li&gt;Keep stirring until it simmers and begins to thicken slightly.&lt;/li&gt;
+&lt;li&gt;Add pepper.&lt;/li&gt;
+&lt;li&gt;Add tuna in chunks.&lt;/li&gt;
+&lt;li&gt;Mix with cooked and drained noodles.&lt;/li&gt;
+&lt;/ol&gt;</content></entry><entry><title>"Tuna Surprises"</title><link href="https://teeks99.github.io/writing/tuna-surprises.html" rel="alternate"></link><published>2019-02-24T10:00:00-06:00</published><updated>2019-02-24T10:00:00-06:00</updated><author><name>Tom</name></author><id>tag:teeks99.github.io,2019-02-24:/writing/tuna-surprises.html</id><summary type="html">&lt;h1&gt;Tuna Surprises&lt;/h1&gt;
+&lt;h2&gt;Ingredients&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;6 Hotdog Buns&lt;/li&gt;
+&lt;li&gt;1 Can Tuna&lt;/li&gt;
+&lt;li&gt;1/3 Cup Mayonaise&lt;/li&gt;
+&lt;li&gt;3 Hard Boiled Eggs&lt;/li&gt;
+&lt;li&gt;1/2lb Cheddar cheese&lt;/li&gt;
+&lt;li&gt;2 Tbsp Green Pepper&lt;/li&gt;
+&lt;li&gt;2 Tbsp Sweet Pickle&lt;/li&gt;
+&lt;li&gt;2 Tbsp Olives&lt;/li&gt;
+&lt;li&gt;2 Tbsp Onion&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Directions&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Chop eggs, pepper, pickle, olives, onion&lt;/li&gt;
+&lt;li&gt;Mix ingredients, put in buns&lt;/li&gt;
+&lt;li&gt;Bake at 250F …&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;h1&gt;Tuna Surprises&lt;/h1&gt;
+&lt;h2&gt;Ingredients&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;6 Hotdog Buns&lt;/li&gt;
+&lt;li&gt;1 Can Tuna&lt;/li&gt;
+&lt;li&gt;1/3 Cup Mayonaise&lt;/li&gt;
+&lt;li&gt;3 Hard Boiled Eggs&lt;/li&gt;
+&lt;li&gt;1/2lb Cheddar cheese&lt;/li&gt;
+&lt;li&gt;2 Tbsp Green Pepper&lt;/li&gt;
+&lt;li&gt;2 Tbsp Sweet Pickle&lt;/li&gt;
+&lt;li&gt;2 Tbsp Olives&lt;/li&gt;
+&lt;li&gt;2 Tbsp Onion&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Directions&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Chop eggs, pepper, pickle, olives, onion&lt;/li&gt;
+&lt;li&gt;Mix ingredients, put in buns&lt;/li&gt;
+&lt;li&gt;Bake at 250F for 20-25min&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Works great without the vegetables as well.&lt;/p&gt;</content></entry><entry><title>"Wreaths"</title><link href="https://teeks99.github.io/writing/wreaths.html" rel="alternate"></link><published>2019-02-24T10:00:00-06:00</published><updated>2019-02-24T10:00:00-06:00</updated><author><name>Tom</name></author><id>tag:teeks99.github.io,2019-02-24:/writing/wreaths.html</id><summary type="html">&lt;h1&gt;Christmas Wreaths&lt;/h1&gt;
+&lt;p&gt;Makes 2 1/2 Dozen&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;30 Large Marshmallows&lt;/li&gt;
+&lt;li&gt;1/2 Cup Butter or Margarine&lt;/li&gt;
+&lt;li&gt;1 Tsp Vanilla&lt;/li&gt;
+&lt;li&gt;1 tsp green food color (may need more)&lt;/li&gt;
+&lt;li&gt;3 cups cornflakes&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;red cinnamon hots candy&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;In 3-QT casserole place butter and marshmallows.  &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;Microwave at high 3 to 4 minutes until melted …&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;h1&gt;Christmas Wreaths&lt;/h1&gt;
+&lt;p&gt;Makes 2 1/2 Dozen&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;30 Large Marshmallows&lt;/li&gt;
+&lt;li&gt;1/2 Cup Butter or Margarine&lt;/li&gt;
+&lt;li&gt;1 Tsp Vanilla&lt;/li&gt;
+&lt;li&gt;1 tsp green food color (may need more)&lt;/li&gt;
+&lt;li&gt;3 cups cornflakes&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;red cinnamon hots candy&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;In 3-QT casserole place butter and marshmallows.  &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;Microwave at high 3 to 4 minutes until melted.  &lt;/li&gt;
+&lt;li&gt;Stir until smooth.  &lt;/li&gt;
+&lt;li&gt;Stir in vanilla and food coloring.  (Make DARK green)  &lt;/li&gt;
+&lt;li&gt;Blend in cornflakes.  &lt;/li&gt;
+&lt;li&gt;Drop by teaspoonful onto waxed paper.  Shape into wreaths.  &lt;/li&gt;
+&lt;li&gt;Add 3 or 4 red cinnamon hots candies to each wreath for a look of holly.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Alternative: Holly bushes -- Don't bother shaping into wreaths&lt;/p&gt;</content></entry><entry><title>"C++ Enums"</title><link href="https://teeks99.github.io/writing/c-enums.html" rel="alternate"></link><published>2019-02-13T22:00:00-06:00</published><updated>2019-02-13T22:00:00-06:00</updated><author><name>Tom</name></author><id>tag:teeks99.github.io,2019-02-13:/writing/c-enums.html</id><summary type="html">&lt;h1&gt;Using Enumerations in C++&lt;/h1&gt;
 &lt;h2&gt;The problem&lt;/h2&gt;
 &lt;p&gt;In olden times, C++ enums were the same as C enums. That is they had global scope for the names created:&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;iostream&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
